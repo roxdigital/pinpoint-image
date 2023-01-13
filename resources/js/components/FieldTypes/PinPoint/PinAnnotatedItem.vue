@@ -45,6 +45,14 @@
                       </p>
                     </div>
 
+                    <!-- 
+                    <color-fieldtype 
+                      v-model="item.data.color"
+                      :isReadOnly="false"
+                      :config="colorConfig"
+                    ></color-fieldtype>
+                    -->
+
                     <div v-if="hasFields">
                         <label class="text-base font-bold mb-1">Fields</label>
                         <div
@@ -107,7 +115,12 @@
     </div>
 </template>
 <script>
+// import ColorFieldtype from '../../../../../../../../vendor/statamic/cms/resources/js/components/fieldtypes/ColorFieldtype.vue'
+
 export default {
+    components: {
+      // ColorFieldtype,
+    },
     props: {
         item: {
             type: Object,
@@ -117,7 +130,8 @@ export default {
                 data: {
                     heading: '',
                     fields: [],
-                    entries: []
+                    entries: [],
+                    color: '',
                 },
             })
         },
@@ -143,7 +157,16 @@ export default {
                 { icon:"markdown", text:"Markdown", value:"markdown", content:'' },
                 { icon:"text", text:"Text", value:"text", content:'' },
                 { icon:"textarea", text:"Textarea", value:"textarea", content:'' }
-            ]
+            ],
+            colorConfig: {
+              lock_opacity: true,
+              swatches: ['#f44336', '#e91e63', '#9c27b0'],
+              theme: 'classic',
+              default_color_mode: 'HEX',
+              default: '#f44336',
+              color_modes: ['hex', 'rgba']
+            },
+            colorValue: '#f44336',
         }
     },
     mounted() {

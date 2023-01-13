@@ -7227,7 +7227,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+// import ColorFieldtype from '../../../../../../../../vendor/statamic/cms/resources/js/components/fieldtypes/ColorFieldtype.vue'
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {// ColorFieldtype,
+  },
   props: {
     item: {
       type: Object,
@@ -7238,7 +7249,8 @@ __webpack_require__.r(__webpack_exports__);
           data: {
             heading: '',
             fields: [],
-            entries: []
+            entries: [],
+            color: ''
           }
         };
       }
@@ -7280,7 +7292,16 @@ __webpack_require__.r(__webpack_exports__);
         text: "Textarea",
         value: "textarea",
         content: ''
-      }]
+      }],
+      colorConfig: {
+        lock_opacity: true,
+        swatches: ['#f44336', '#e91e63', '#9c27b0'],
+        theme: 'classic',
+        default_color_mode: 'HEX',
+        "default": '#f44336',
+        color_modes: ['hex', 'rgba']
+      },
+      colorValue: '#f44336'
     };
   },
   mounted: function mounted() {// console.log(this.selected)

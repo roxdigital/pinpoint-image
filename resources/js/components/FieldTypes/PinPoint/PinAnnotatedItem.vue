@@ -45,13 +45,11 @@
                       </p>
                     </div>
 
-                    <!-- 
                     <color-fieldtype 
                       v-model="item.data.color"
                       :isReadOnly="false"
                       :config="colorConfig"
                     ></color-fieldtype>
-                    -->
 
                     <div v-if="hasFields">
                         <label class="text-base font-bold mb-1">Fields</label>
@@ -115,12 +113,7 @@
     </div>
 </template>
 <script>
-// import ColorFieldtype from '../../../../../../../../vendor/statamic/cms/resources/js/components/fieldtypes/ColorFieldtype.vue'
-
 export default {
-    components: {
-      // ColorFieldtype,
-    },
     props: {
         item: {
             type: Object,

@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@shopify/draggable": "^1.0.0-beta.8",
+    "@simonwep/pickr": "^1.8.2",
     "cross-env": "^7.0.2",
     "dmuploader": "^1.0.4",
     "laravel-mix": "^5.0.4",

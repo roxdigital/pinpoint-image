@@ -7233,12 +7233,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-// import ColorFieldtype from '../../../../../../../../vendor/statamic/cms/resources/js/components/fieldtypes/ColorFieldtype.vue'
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: {// ColorFieldtype,
-  },
   props: {
     item: {
       type: Object,
@@ -8875,195 +8870,217 @@ var render = function () {
                   ]),
                 ]),
                 _vm._v(" "),
-                _c("div", [
-                  _c("label", { staticClass: "text-base font-bold mb-1" }, [
-                    _vm._v("Heading"),
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.item.data.heading,
-                        expression: "item.data.heading",
-                      },
-                    ],
-                    staticClass: "input-text mb-2",
-                    attrs: { type: "text" },
-                    domProps: { value: _vm.item.data.heading },
-                    on: {
-                      input: function ($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.item.data, "heading", $event.target.value)
-                      },
-                    },
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "flex flex-col gap-2" }, [
-                    _c("h3", { staticClass: "text-base font-bold" }, [
-                      _vm._v("Page entry"),
+                _c(
+                  "div",
+                  [
+                    _c("label", { staticClass: "text-base font-bold mb-1" }, [
+                      _vm._v("Heading"),
                     ]),
                     _vm._v(" "),
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.item.data.entries,
-                            expression: "item.data.entries",
-                          },
-                        ],
-                        staticClass: "py-1",
-                        on: {
-                          change: [
-                            function ($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function (o) {
-                                  return o.selected
-                                })
-                                .map(function (o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.$set(
-                                _vm.item.data,
-                                "entries",
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              )
-                            },
-                            _vm.onSelectionChange,
-                          ],
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.item.data.heading,
+                          expression: "item.data.heading",
+                        },
+                      ],
+                      staticClass: "input-text mb-2",
+                      attrs: { type: "text" },
+                      domProps: { value: _vm.item.data.heading },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.item.data,
+                            "heading",
+                            $event.target.value
+                          )
                         },
                       },
-                      _vm._l(_vm.createEntriesObject(), function (option) {
-                        return _c(
-                          "option",
-                          { domProps: { value: option.value } },
-                          [
-                            _vm._v(
-                              "\n                        " +
-                                _vm._s(option.label) +
-                                "\n                      "
-                            ),
-                          ]
-                        )
-                      }),
-                      0
-                    ),
+                    }),
                     _vm._v(" "),
-                    _c("p", { staticClass: "text-sm text-gray-100" }, [
-                      _vm._v("The selected page is: \n                    "),
+                    _c("div", { staticClass: "flex flex-col gap-2" }, [
+                      _c("h3", { staticClass: "text-base font-bold" }, [
+                        _vm._v("Page entry"),
+                      ]),
+                      _vm._v(" "),
                       _c(
-                        "span",
-                        { staticClass: "font-bold not-italic text-sm" },
-                        [_vm._v(_vm._s(_vm.item.data.entries))]
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.item.data.entries,
+                              expression: "item.data.entries",
+                            },
+                          ],
+                          staticClass: "py-1",
+                          on: {
+                            change: [
+                              function ($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function (o) {
+                                    return o.selected
+                                  })
+                                  .map(function (o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.item.data,
+                                  "entries",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              },
+                              _vm.onSelectionChange,
+                            ],
+                          },
+                        },
+                        _vm._l(_vm.createEntriesObject(), function (option) {
+                          return _c(
+                            "option",
+                            { domProps: { value: option.value } },
+                            [
+                              _vm._v(
+                                "\n                        " +
+                                  _vm._s(option.label) +
+                                  "\n                      "
+                              ),
+                            ]
+                          )
+                        }),
+                        0
                       ),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "text-sm text-gray-100" }, [
+                        _vm._v("The selected page is: \n                    "),
+                        _c(
+                          "span",
+                          { staticClass: "font-bold not-italic text-sm" },
+                          [_vm._v(_vm._s(_vm.item.data.entries))]
+                        ),
+                      ]),
                     ]),
-                  ]),
-                  _vm._v(" "),
-                  _vm.hasFields
-                    ? _c(
-                        "div",
-                        [
-                          _c(
-                            "label",
-                            { staticClass: "text-base font-bold mb-1" },
-                            [_vm._v("Fields")]
-                          ),
-                          _vm._v(" "),
-                          _vm._l(
-                            _vm.item.data.fields,
-                            function (field, fIndex) {
-                              return _c(
-                                "div",
-                                { key: fIndex, staticClass: "w-full pb-4" },
-                                [
-                                  _c(field.value + "-fieldtype", {
-                                    tag: "component",
-                                    attrs: {
-                                      value: field.content,
-                                      handle: field.value + "_field",
-                                      "name-prefix": "",
-                                      "error-key-prefix": "",
-                                      "read-only": false,
-                                      "deed-eded": "$emit('input', $event)",
-                                    },
-                                    on: {
-                                      "update:value": function ($event) {
-                                        return _vm.$set(
-                                          field,
-                                          "content",
-                                          $event
-                                        )
+                    _vm._v(" "),
+                    _c("color-fieldtype", {
+                      attrs: { isReadOnly: false, config: _vm.colorConfig },
+                      model: {
+                        value: _vm.item.data.color,
+                        callback: function ($$v) {
+                          _vm.$set(_vm.item.data, "color", $$v)
+                        },
+                        expression: "item.data.color",
+                      },
+                    }),
+                    _vm._v(" "),
+                    _vm.hasFields
+                      ? _c(
+                          "div",
+                          [
+                            _c(
+                              "label",
+                              { staticClass: "text-base font-bold mb-1" },
+                              [_vm._v("Fields")]
+                            ),
+                            _vm._v(" "),
+                            _vm._l(
+                              _vm.item.data.fields,
+                              function (field, fIndex) {
+                                return _c(
+                                  "div",
+                                  { key: fIndex, staticClass: "w-full pb-4" },
+                                  [
+                                    _c(field.value + "-fieldtype", {
+                                      tag: "component",
+                                      attrs: {
+                                        value: field.content,
+                                        handle: field.value + "_field",
+                                        "name-prefix": "",
+                                        "error-key-prefix": "",
+                                        "read-only": false,
+                                        "deed-eded": "$emit('input', $event)",
                                       },
-                                      input: function ($event) {
-                                        return _vm.updateFieldContent(
-                                          $event,
-                                          field,
-                                          fIndex
-                                        )
+                                      on: {
+                                        "update:value": function ($event) {
+                                          return _vm.$set(
+                                            field,
+                                            "content",
+                                            $event
+                                          )
+                                        },
+                                        input: function ($event) {
+                                          return _vm.updateFieldContent(
+                                            $event,
+                                            field,
+                                            fIndex
+                                          )
+                                        },
+                                        "meta-updated": function ($event) {
+                                          return _vm.$emit(
+                                            "meta-updated",
+                                            $event
+                                          )
+                                        },
+                                        focus: _vm.focused,
                                       },
-                                      "meta-updated": function ($event) {
-                                        return _vm.$emit("meta-updated", $event)
-                                      },
-                                      focus: _vm.focused,
-                                    },
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    { staticClass: "flex justify-end mt-1" },
-                                    [
-                                      _c(
-                                        "a",
-                                        {
-                                          directives: [
-                                            {
-                                              name: "tooltip",
-                                              rawName: "v-tooltip",
-                                              value: "Delete field",
-                                              expression: "'Delete field'",
-                                            },
-                                          ],
-                                          staticClass: "text-xs",
-                                          attrs: { href: "#" },
-                                          on: {
-                                            click: function ($event) {
-                                              $event.preventDefault()
-                                              return _vm.removeField(
-                                                field,
-                                                fIndex
-                                              )
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "flex justify-end mt-1" },
+                                      [
+                                        _c(
+                                          "a",
+                                          {
+                                            directives: [
+                                              {
+                                                name: "tooltip",
+                                                rawName: "v-tooltip",
+                                                value: "Delete field",
+                                                expression: "'Delete field'",
+                                              },
+                                            ],
+                                            staticClass: "text-xs",
+                                            attrs: { href: "#" },
+                                            on: {
+                                              click: function ($event) {
+                                                $event.preventDefault()
+                                                return _vm.removeField(
+                                                  field,
+                                                  fIndex
+                                                )
+                                              },
                                             },
                                           },
-                                        },
-                                        [
-                                          _c("svg-icon", {
-                                            staticClass: "w-4 h-4",
-                                            attrs: { name: "trash" },
-                                          }),
-                                        ],
-                                        1
-                                      ),
-                                    ]
-                                  ),
-                                ],
-                                1
-                              )
-                            }
-                          ),
-                        ],
-                        2
-                      )
-                    : _vm._e(),
-                ]),
+                                          [
+                                            _c("svg-icon", {
+                                              staticClass: "w-4 h-4",
+                                              attrs: { name: "trash" },
+                                            }),
+                                          ],
+                                          1
+                                        ),
+                                      ]
+                                    ),
+                                  ],
+                                  1
+                                )
+                              }
+                            ),
+                          ],
+                          2
+                        )
+                      : _vm._e(),
+                  ],
+                  1
+                ),
                 _vm._v(" "),
                 _c("div", { staticClass: "mt-5" }, [
                   _vm.isSelectingNewFieldtype

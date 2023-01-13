@@ -27,7 +27,8 @@
         @input="updateKey($event)"
       ></assets-fieldtype>
     </div>
-    <div class="flex flex-row parent-wrap" v-show="hasImage">
+
+    <div class="flex flex-col parent-wrap" v-show="hasImage">
       <div class="pin-annotated-items">
         <sortable-list
           v-model="annotations"
@@ -36,6 +37,7 @@
           handle-class="sortable-handle"
           @dragstart="$emit('focus')"
           @dragend="updateOrder"
+          style="display: flex; flex-wrap: wrap; order: 2;"
         >
           <div ref="list">
             <div
@@ -50,12 +52,14 @@
                 :item.sync="annotation"
                 :item-index="index"
                 :entries="meta.entries"
+                style="padding: 8px 14px !important;"
               ></pin-annotated-item>
             </div>
           </div>
         </sortable-list>
       </div>
-      <div class="pin-point-image-image">
+
+      <div class="pin-point-image-image order-1">
         <div class="pinpoint-preview relative">
           <div class="border-b border-r border-l">
             <img :src="imageUrl" ref="floorplan" @click="getClickedPosition" />
@@ -75,6 +79,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import PinAnnotatedItem from "./PinPoint/PinAnnotatedItem";
 import {
@@ -308,6 +313,7 @@ export default {
   },
 };
 </script>
+
 <style>
 .field-type-pinpoint-image .assets-fieldtype-picker {
   display: flex;
@@ -379,10 +385,11 @@ export default {
 }
 
 .pin-annotated-items {
-  width: 15%;
+  width: 100%;
+  order: 2;
 }
 .pin-point-image-image {
-  width: 85%;
+  width: 100%;
 }
 
 .pinpoint-annotate span {

@@ -1,6 +1,6 @@
 <template>
     <div class="px-1 py-1 bg-white border-b border-r border-l flex-1">
-        <div class="flex flex-col ">
+        <div class="flex flex-col gap-1">
             <h5 v-text="`Point ${itemIndex + 1}`" class="text-xs mb-0"></h5>
             <h6 v-text="item.data.heading" class="break-all" style="font-size:10px;"></h6>
             <div class="flex justify-between w-full--">
@@ -31,13 +31,19 @@
                     <label class="text-base font-bold mb-1">Heading</label>
                     <input type="text" v-model="item.data.heading" class="input-text mb-2">
 
-                    <select v-model="item.data.entries" @change="onSelectionChange">
-                       <option v-for="option in createEntriesObject()" v-bind:value="option.value">
-                          {{ option.label }}
-                        </option>
-                    </select>
+                    <div class="flex flex-col gap-2">
+                      <h3 class="text-base font-bold">Page entry</h3>
 
-                    <p>The selected item is: {{ item.data.entries }}</p>
+                      <select v-model="item.data.entries" @change="onSelectionChange" class="py-1">
+                        <option v-for="option in createEntriesObject()" v-bind:value="option.value">
+                            {{ option.label }}
+                          </option>
+                      </select>
+
+                      <p class="text-sm text-gray-100">The selected page is: 
+                        <span class="font-bold not-italic text-sm">{{ item.data.entries }}</span>
+                      </p>
+                    </div>
 
                     <div v-if="hasFields">
                         <label class="text-base font-bold mb-1">Fields</label>
@@ -133,8 +139,6 @@ export default {
             entries: this.entries,
             selected: null,
             fieldtypes: [
-                // { icon:"bard", text:"Bard", value:"bard", content:'' },
-                // { icon:"html", text:"html", value:"html", content:'' },
                 { icon:"entries", text:"entries", value:"link", content:[] },
                 { icon:"markdown", text:"Markdown", value:"markdown", content:'' },
                 { icon:"text", text:"Text", value:"text", content:'' },
@@ -179,12 +183,12 @@ export default {
           return this.entries.map((entry) => {
             return {
               'label': entry.title,
-              'value': entry.id,
+              'value': entry.url,
             }
           })
         },
         onSelectionChange() {
-          console.log(this.selected)
+          console.log(this.item.data.entries)
         },
     }
 }

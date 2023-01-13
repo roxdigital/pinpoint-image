@@ -3,5 +3,5 @@ const webpack = require("webpack");
 mix
   .js("resources/js/cp.js", "resources/dist/js")
   .setPublicPath("resources/dist")
-  // .copy('resources/dist/js', '../../../public/vendor/pinpoint-image/js/')
   .copy("resources/img", "../../../public/vendor/pinpoint-image/img/");
+// .copy('resources/dist/js', '../../../public/vendor/pinpoint-image/js/')

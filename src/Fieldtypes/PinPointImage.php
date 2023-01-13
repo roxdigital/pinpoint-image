@@ -33,7 +33,6 @@ class PinPointImage extends Fieldtype
         'entries' => []
     ];
     protected $selectableInForms = true;
-    protected $entries = null;
 
     protected function configFieldItems(): array
     {
@@ -84,12 +83,6 @@ class PinPointImage extends Fieldtype
                 'default' => true,
                 'width' => 50,
             ],
-            'entries' => [
-                'display' => __('Entries'),
-                'instructions' => __('Select the entries that should be associated with this image'),
-                'type' => 'entries',
-                'max_items' => null,
-            ],
         ];
     }
 
@@ -103,19 +96,15 @@ class PinPointImage extends Fieldtype
      */
     public function preProcess($values)
     {
-        // dd($values['annotations']);
         if (is_null($values) || empty($values)) {
             return null;
         }
-
-        // $this->entries = $values['entries'] ?? null;
 
         return $values;
     }
 
     public function process($data)
     {   
-        // $data['entries'] = $this->entries;
         return $data;
     }
 
@@ -138,10 +127,8 @@ class PinPointImage extends Fieldtype
 
     public function getItemData($items)
     {
-        // dd($items);
         return $items;
     }
-
 
     protected function container()
     {

@@ -7221,6 +7221,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     item: {
@@ -7254,9 +7260,7 @@ __webpack_require__.r(__webpack_exports__);
       fields: this.item.data.fields,
       entries: this.entries,
       selected: null,
-      fieldtypes: [// { icon:"bard", text:"Bard", value:"bard", content:'' },
-      // { icon:"html", text:"html", value:"html", content:'' },
-      {
+      fieldtypes: [{
         icon: "entries",
         text: "entries",
         value: "link",
@@ -7318,12 +7322,12 @@ __webpack_require__.r(__webpack_exports__);
       return this.entries.map(function (entry) {
         return {
           'label': entry.title,
-          'value': entry.id
+          'value': entry.url
         };
       });
     },
     onSelectionChange: function onSelectionChange() {
-      console.log(this.selected);
+      console.log(this.item.data.entries);
     }
   }
 });
@@ -7341,6 +7345,11 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _PinPoint_PinAnnotatedItem__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PinPoint/PinAnnotatedItem */ "./resources/js/components/FieldTypes/PinPoint/PinAnnotatedItem.vue");
 /* harmony import */ var _sortable_Sortable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../sortable/Sortable */ "./resources/js/sortable/Sortable.js");
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7822,7 +7831,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.pinpoint-preview[data-v-1bd3bfc9] {\n  max-width: 100%;\n  position: relative;\n  cursor: crosshair;\n}\n.pinpoint-preview img[data-v-1bd3bfc9] {\n  width: 100%;\n  height: auto;\n}\n.pinpoint-annotate[data-v-1bd3bfc9] {\n  position: absolute;\n  border-radius: 50% 50% 0;\n  transform: rotate(45deg);\n  background-color: #303750;\n  color: #fff;\n\n  height: 30px;\n  width: 30px;\n  text-align: center;\n  line-height: 30px;\n  font-weight: 700;\n  font-size: 12px;\n  cursor: pointer;\n&::after {\n    content: \"\";\n    position: absolute;\n    width: 50%;\n    height: 50%;\n    top: 25%;\n    left: 25%;\n    border-radius: 50%;\n}\n}\n.pin-annotated-items[data-v-1bd3bfc9] {\n  width: 15%;\n}\n.pin-point-image-image[data-v-1bd3bfc9] {\n  width: 85%;\n}\n.pinpoint-annotate span[data-v-1bd3bfc9] {\n  display: block;\n  transform: rotate(-45deg);\n}\n.pinpoint-drag-handle[data-v-1bd3bfc9] {\n  width: 20px;\n  border-left-width: 1px;\n  border-bottom-width: 1px;\n  height: auto;\n  padding: 8px;\n  cursor: -webkit-grab;\n  cursor: grab;\n  background: #f5f8fc url(\"/vendor/pinpoint-image/img/drag-dots.svg\") 50%\n    no-repeat;\n}\n", ""]);
+exports.push([module.i, "\n.pinpoint-preview[data-v-1bd3bfc9] {\n  max-width: 100%;\n  position: relative;\n  cursor: crosshair;\n}\n.pinpoint-preview img[data-v-1bd3bfc9] {\n  width: 100%;\n  height: auto;\n}\n.pinpoint-annotate[data-v-1bd3bfc9] {\n  position: absolute;\n  border-radius: 50% 50% 0;\n  transform: rotate(45deg);\n  background-color: #303750;\n  color: #fff;\n\n  height: 30px;\n  width: 30px;\n  text-align: center;\n  line-height: 30px;\n  font-weight: 700;\n  font-size: 12px;\n  cursor: pointer;\n&::after {\n    content: \"\";\n    position: absolute;\n    width: 50%;\n    height: 50%;\n    top: 25%;\n    left: 25%;\n    border-radius: 50%;\n}\n}\n.pin-annotated-items[data-v-1bd3bfc9] {\n  width: 100%;\n  order: 2;\n}\n.pin-point-image-image[data-v-1bd3bfc9] {\n  width: 100%;\n}\n.pinpoint-annotate span[data-v-1bd3bfc9] {\n  display: block;\n  transform: rotate(-45deg);\n}\n.pinpoint-drag-handle[data-v-1bd3bfc9] {\n  width: 20px;\n  border-left-width: 1px;\n  border-bottom-width: 1px;\n  height: auto;\n  padding: 8px;\n  cursor: -webkit-grab;\n  cursor: grab;\n  background: #f5f8fc url(\"/vendor/pinpoint-image/img/drag-dots.svg\") 50%\n    no-repeat;\n}\n", ""]);
 
 // exports
 
@@ -8741,7 +8750,7 @@ var render = function () {
     "div",
     { staticClass: "px-1 py-1 bg-white border-b border-r border-l flex-1" },
     [
-      _c("div", { staticClass: "flex flex-col " }, [
+      _c("div", { staticClass: "flex flex-col gap-1" }, [
         _c("h5", {
           staticClass: "text-xs mb-0",
           domProps: { textContent: _vm._s("Point " + (_vm.itemIndex + 1)) },
@@ -8872,60 +8881,70 @@ var render = function () {
                     },
                   }),
                   _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.item.data.entries,
-                          expression: "item.data.entries",
-                        },
-                      ],
-                      on: {
-                        change: [
-                          function ($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function (o) {
-                                return o.selected
-                              })
-                              .map(function (o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.$set(
-                              _vm.item.data,
-                              "entries",
-                              $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            )
+                  _c("div", { staticClass: "flex flex-col gap-2" }, [
+                    _c("h3", { staticClass: "text-base font-bold" }, [
+                      _vm._v("Page entry"),
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.item.data.entries,
+                            expression: "item.data.entries",
                           },
-                          _vm.onSelectionChange,
                         ],
+                        staticClass: "py-1",
+                        on: {
+                          change: [
+                            function ($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function (o) {
+                                  return o.selected
+                                })
+                                .map(function (o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.item.data,
+                                "entries",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            },
+                            _vm.onSelectionChange,
+                          ],
+                        },
                       },
-                    },
-                    _vm._l(_vm.createEntriesObject(), function (option) {
-                      return _c(
-                        "option",
-                        { domProps: { value: option.value } },
-                        [
-                          _vm._v(
-                            "\n                      " +
-                              _vm._s(option.label) +
-                              "\n                    "
-                          ),
-                        ]
-                      )
-                    }),
-                    0
-                  ),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v(
-                      "The selected item is: " + _vm._s(_vm.item.data.entries)
+                      _vm._l(_vm.createEntriesObject(), function (option) {
+                        return _c(
+                          "option",
+                          { domProps: { value: option.value } },
+                          [
+                            _vm._v(
+                              "\n                        " +
+                                _vm._s(option.label) +
+                                "\n                      "
+                            ),
+                          ]
+                        )
+                      }),
+                      0
                     ),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "text-sm text-gray-100" }, [
+                      _vm._v("The selected page is: \n                    "),
+                      _c(
+                        "span",
+                        { staticClass: "font-bold not-italic text-sm" },
+                        [_vm._v(_vm._s(_vm.item.data.entries))]
+                      ),
+                    ]),
                   ]),
                   _vm._v(" "),
                   _vm.hasFields
@@ -9241,7 +9260,7 @@ var render = function () {
             expression: "hasImage",
           },
         ],
-        staticClass: "flex flex-row parent-wrap",
+        staticClass: "flex flex-col parent-wrap",
       },
       [
         _c(
@@ -9251,6 +9270,11 @@ var render = function () {
             _c(
               "sortable-list",
               {
+                staticStyle: {
+                  display: "flex",
+                  "flex-wrap": "wrap",
+                  order: "2",
+                },
                 attrs: {
                   vertical: true,
                   "item-class": "sortable-row",
@@ -9293,6 +9317,7 @@ var render = function () {
                         }),
                         _vm._v(" "),
                         _c("pin-annotated-item", {
+                          staticStyle: { padding: "8px 14px !important" },
                           attrs: {
                             item: annotation,
                             "item-index": index,
@@ -9319,7 +9344,7 @@ var render = function () {
           1
         ),
         _vm._v(" "),
-        _c("div", { staticClass: "pin-point-image-image" }, [
+        _c("div", { staticClass: "pin-point-image-image order-1" }, [
           _c(
             "div",
             { staticClass: "pinpoint-preview relative" },

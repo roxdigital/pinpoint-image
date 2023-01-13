@@ -42,12 +42,14 @@
               v-for="(annotation, index) in annotations"
               :key="index"
               class="flex flex-row sortable-row items-stretch justify-stretch"
+              @click="logToConsole(annotation)"
             >
               <span class="pinpoint-drag-handle sortable-handle"></span>
               <pin-annotated-item
                 @delete="remove(index)"
                 :item.sync="annotation"
                 :item-index="index"
+                :entries="meta.entries"
               ></pin-annotated-item>
             </div>
           </div>
@@ -80,6 +82,7 @@ import {
   SortableItem,
   SortableHelpers,
 } from "./../../sortable/Sortable";
+
 export default {
   components: {
     PinAnnotatedItem,
@@ -90,6 +93,8 @@ export default {
   mixins: [Fieldtype, SortableHelpers],
 
   mounted() {
+    console.log({value: this.value})
+
     if (this.config.max_files === undefined) {
       this.config.max_files = 1;
     }
@@ -148,6 +153,9 @@ export default {
     },
   },
   methods: {
+    logToConsole(message) {
+      console.log(message);
+    },
     reorderItems() {
       this.drag = false;
     },
@@ -218,6 +226,7 @@ export default {
         data: {
           heading: "",
           fields: [],
+          entries: null,
         },
       });
       this.fieldValue.annotations = this.annotations;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Weareframework\PinpointImage\Tags;
+namespace Roxdigital\PinpointImage\Tags;
 
 use Statamic\Facades\Asset;
 use Statamic\Http\Resources\API\AssetResource;

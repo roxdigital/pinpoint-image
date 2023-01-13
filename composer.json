@@ -1,11 +1,11 @@
 {
-    "name": "weareframework/pinpoint-image",
+    "name": "roxdigital/pinpoint-image",
     "require": {
         "php": "^7.4|^8.0"
     },
     "autoload": {
         "psr-4": {
-            "Weareframework\\PinpointImage\\": "src"
+            "Roxdigital\\PinpointImage\\": "src"
         }
     },
     "extra": {
@@ -15,7 +15,7 @@
         },
         "laravel": {
             "providers": [
-                "Weareframework\\PinpointImage\\ServiceProvider"
+                "Roxdigital\\PinpointImage\\ServiceProvider"
             ]
         }
     }

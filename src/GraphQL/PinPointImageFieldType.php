@@ -1,6 +1,6 @@
 <?php
 
-namespace Weareframework\PinpointImage\GraphQL;
+namespace Roxdigital\PinpointImage\GraphQL;
 
 
 use Illuminate\Support\Arr;

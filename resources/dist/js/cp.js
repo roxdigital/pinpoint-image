@@ -7213,6 +7213,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     item: {
@@ -7223,7 +7231,8 @@ __webpack_require__.r(__webpack_exports__);
           y: 0,
           data: {
             heading: '',
-            fields: []
+            fields: [],
+            entries: []
           }
         };
       }
@@ -7231,6 +7240,10 @@ __webpack_require__.r(__webpack_exports__);
     itemIndex: {
       type: Number,
       "default": 0
+    },
+    entries: {
+      type: Array,
+      "default": []
     }
   },
   data: function data() {
@@ -7239,9 +7252,16 @@ __webpack_require__.r(__webpack_exports__);
       modalOpen: false,
       heading: this.item.data.heading,
       fields: this.item.data.fields,
+      entries: this.entries,
+      selected: null,
       fieldtypes: [// { icon:"bard", text:"Bard", value:"bard", content:'' },
       // { icon:"html", text:"html", value:"html", content:'' },
       {
+        icon: "entries",
+        text: "entries",
+        value: "link",
+        content: []
+      }, {
         icon: "markdown",
         text: "Markdown",
         value: "markdown",
@@ -7258,6 +7278,8 @@ __webpack_require__.r(__webpack_exports__);
         content: ''
       }]
     };
+  },
+  mounted: function mounted() {// console.log(this.selected)
   },
   computed: {
     hasFields: function hasFields() {
@@ -7291,6 +7313,17 @@ __webpack_require__.r(__webpack_exports__);
     },
     cleanObject: function cleanObject(obj) {
       return JSON.parse(JSON.stringify(obj));
+    },
+    createEntriesObject: function createEntriesObject() {
+      return this.entries.map(function (entry) {
+        return {
+          'label': entry.title,
+          'value': entry.id
+        };
+      });
+    },
+    onSelectionChange: function onSelectionChange() {
+      console.log(this.selected);
     }
   }
 });
@@ -7385,8 +7418,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -7397,6 +7428,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   mixins: [Fieldtype, _sortable_Sortable__WEBPACK_IMPORTED_MODULE_1__["SortableHelpers"]],
   mounted: function mounted() {
+    console.log({
+      value: this.value
+    });
+
     if (this.config.max_files === undefined) {
       this.config.max_files = 1;
     }
@@ -7417,8 +7452,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       drag: false,
       fieldValue: {
-        "image": {},
-        "annotations": []
+        image: {},
+        annotations: []
       },
       hasImage: false,
       containerWidth: null,
@@ -7452,6 +7487,9 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    logToConsole: function logToConsole(message) {
+      console.log(message);
+    },
     reorderItems: function reorderItems() {
       this.drag = false;
     },
@@ -7459,18 +7497,18 @@ __webpack_require__.r(__webpack_exports__);
       this.$set(this.annotations, updatedData.index, updatedData.data);
     },
     clearImage: function clearImage() {
-      if (!confirm('Are you sure?')) {
+      if (!confirm("Are you sure?")) {
         return;
       }
 
       this.cleanOutImage();
     },
     clearAnnotations: function clearAnnotations() {
-      if (!confirm('Are you sure?')) {
+      if (!confirm("Are you sure?")) {
         return;
       }
 
-      this.$set(this, 'annotations', []);
+      this.$set(this, "annotations", []);
     },
     cleanOutImage: function cleanOutImage() {
       this.image = null;
@@ -7497,7 +7535,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.loading = true;
-      this.$axios.get(this.cpUrl('assets-fieldtype'), {
+      this.$axios.get(this.cpUrl("assets-fieldtype"), {
         params: {
           assets: value
         }
@@ -7513,8 +7551,8 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     cpUrl: function cpUrl(url) {
-      url = Statamic.$config.get('cpUrl') + '/' + url;
-      return url.replace(/([^:])(\/\/+)/g, '$1/');
+      url = Statamic.$config.get("cpUrl") + "/" + url;
+      return url.replace(/([^:])(\/\/+)/g, "$1/");
     },
     getClickedPosition: function getClickedPosition(e) {
       var xy = this.getXyPosition(e);
@@ -7522,8 +7560,9 @@ __webpack_require__.r(__webpack_exports__);
         x: xy.x,
         y: xy.y,
         data: {
-          heading: '',
-          fields: []
+          heading: "",
+          fields: [],
+          entries: null
         }
       });
       this.fieldValue.annotations = this.annotations;
@@ -7547,7 +7586,7 @@ __webpack_require__.r(__webpack_exports__);
       var yPos = 0;
 
       while (el) {
-        if (el.tagName === 'BODY') {
+        if (el.tagName === "BODY") {
           // deal with browser quirks with body/window/document and page scroll
           var xScroll = el.scrollLeft || document.documentElement.scrollLeft;
           var yScroll = el.scrollTop || document.documentElement.scrollTop;
@@ -7764,7 +7803,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.field-type-pinpoint-image .assets-fieldtype-picker {\n    display: flex;\n    align-items: center;\n    padding: 8px 16px;\n    --bg-opacity: 1;\n    background-color: #f5f8fc;\n    background-color: rgba(244.79999999999998,248.11499999999998,252.45,var(--bg-opacity));\n    border-width: 1px;\n    border-radius: 3px;\n}\n.field-type-pinpoint-image .asset-upload-control {\n    margin-left: 16px;\n}\n.field-type-pinpoint-image .upload-text-button {\n    --text-opacity: 1;\n    color: #19a1e6;\n    color: rgba(25.499999999999993,161.49999999999994,229.5,var(--text-opacity));\n    text-decoration: underline;\n    white-space: nowrap;\n}\n", ""]);
+exports.push([module.i, "\n.field-type-pinpoint-image .assets-fieldtype-picker {\n  display: flex;\n  align-items: center;\n  padding: 8px 16px;\n  --bg-opacity: 1;\n  background-color: #f5f8fc;\n  background-color: rgba(\n    244.79999999999998,\n    248.11499999999998,\n    252.45,\n    var(--bg-opacity)\n  );\n  border-width: 1px;\n  border-radius: 3px;\n}\n.field-type-pinpoint-image .asset-upload-control {\n  margin-left: 16px;\n}\n.field-type-pinpoint-image .upload-text-button {\n  --text-opacity: 1;\n  color: #19a1e6;\n  color: rgba(\n    25.499999999999993,\n    161.49999999999994,\n    229.5,\n    var(--text-opacity)\n  );\n  text-decoration: underline;\n  white-space: nowrap;\n}\n", ""]);
 
 // exports
 
@@ -7783,7 +7822,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.pinpoint-preview[data-v-1bd3bfc9] {\n    max-width: 100%;\n    position: relative;\n    cursor: crosshair;\n}\n.pinpoint-preview img[data-v-1bd3bfc9] {\n    width: 100%;\n    height: auto;\n}\n.pinpoint-annotate[data-v-1bd3bfc9] {\n    position: absolute;\n    border-radius: 50% 50% 0;\n    transform: rotate(45deg);\n    background-color: #303750;\n    color: #fff;\n\n    height: 30px;\n    width: 30px;\n    text-align: center;\n    line-height: 30px;\n    font-weight: 700;\n    font-size: 12px;\n    cursor: pointer;\n&::after {\n         content: '';\n         position: absolute;\n         width: 50%;\n         height: 50%;\n         top: 25%;\n         left: 25%;\n         border-radius: 50%;\n}\n}\n.pin-annotated-items[data-v-1bd3bfc9] {\n    width: 15%;\n}\n.pin-point-image-image[data-v-1bd3bfc9] {\n    width: 85%;\n}\n.pinpoint-annotate span[data-v-1bd3bfc9] {\n    display: block;\n    transform: rotate(-45deg);\n}\n.pinpoint-drag-handle[data-v-1bd3bfc9] {\n    width: 20px;\n    border-left-width: 1px;\n    border-bottom-width: 1px;\n    height: auto;\n    padding: 8px;\n    cursor: -webkit-grab;\n    cursor: grab;\n    background: #f5f8fc url('/vendor/pinpoint-image/img/drag-dots.svg') 50% no-repeat;\n}\n", ""]);
+exports.push([module.i, "\n.pinpoint-preview[data-v-1bd3bfc9] {\n  max-width: 100%;\n  position: relative;\n  cursor: crosshair;\n}\n.pinpoint-preview img[data-v-1bd3bfc9] {\n  width: 100%;\n  height: auto;\n}\n.pinpoint-annotate[data-v-1bd3bfc9] {\n  position: absolute;\n  border-radius: 50% 50% 0;\n  transform: rotate(45deg);\n  background-color: #303750;\n  color: #fff;\n\n  height: 30px;\n  width: 30px;\n  text-align: center;\n  line-height: 30px;\n  font-weight: 700;\n  font-size: 12px;\n  cursor: pointer;\n&::after {\n    content: \"\";\n    position: absolute;\n    width: 50%;\n    height: 50%;\n    top: 25%;\n    left: 25%;\n    border-radius: 50%;\n}\n}\n.pin-annotated-items[data-v-1bd3bfc9] {\n  width: 15%;\n}\n.pin-point-image-image[data-v-1bd3bfc9] {\n  width: 85%;\n}\n.pinpoint-annotate span[data-v-1bd3bfc9] {\n  display: block;\n  transform: rotate(-45deg);\n}\n.pinpoint-drag-handle[data-v-1bd3bfc9] {\n  width: 20px;\n  border-left-width: 1px;\n  border-bottom-width: 1px;\n  height: auto;\n  padding: 8px;\n  cursor: -webkit-grab;\n  cursor: grab;\n  background: #f5f8fc url(\"/vendor/pinpoint-image/img/drag-dots.svg\") 50%\n    no-repeat;\n}\n", ""]);
 
 // exports
 
@@ -8833,6 +8872,62 @@ var render = function () {
                     },
                   }),
                   _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.item.data.entries,
+                          expression: "item.data.entries",
+                        },
+                      ],
+                      on: {
+                        change: [
+                          function ($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function (o) {
+                                return o.selected
+                              })
+                              .map(function (o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.item.data,
+                              "entries",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          },
+                          _vm.onSelectionChange,
+                        ],
+                      },
+                    },
+                    _vm._l(_vm.createEntriesObject(), function (option) {
+                      return _c(
+                        "option",
+                        { domProps: { value: option.value } },
+                        [
+                          _vm._v(
+                            "\n                      " +
+                              _vm._s(option.label) +
+                              "\n                    "
+                          ),
+                        ]
+                      )
+                    }),
+                    0
+                  ),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v(
+                      "The selected item is: " + _vm._s(_vm.item.data.entries)
+                    ),
+                  ]),
+                  _vm._v(" "),
                   _vm.hasFields
                     ? _c(
                         "div",
@@ -9089,9 +9184,7 @@ var render = function () {
                 },
                 [
                   _vm._v(
-                    "\n            " +
-                      _vm._s(_vm.__("Clear Annotations")) +
-                      "\n        "
+                    "\n      " + _vm._s(_vm.__("Clear Annotations")) + "\n    "
                   ),
                 ]
               )
@@ -9109,13 +9202,7 @@ var render = function () {
                     },
                   },
                 },
-                [
-                  _vm._v(
-                    "\n            " +
-                      _vm._s(_vm.__("Clear Image")) +
-                      "\n        "
-                  ),
-                ]
+                [_vm._v("\n      " + _vm._s(_vm.__("Clear Image")) + "\n    ")]
               )
             : _vm._e(),
         ])
@@ -9194,6 +9281,11 @@ var render = function () {
                         key: index,
                         staticClass:
                           "flex flex-row sortable-row items-stretch justify-stretch",
+                        on: {
+                          click: function ($event) {
+                            return _vm.logToConsole(annotation)
+                          },
+                        },
                       },
                       [
                         _c("span", {
@@ -9201,7 +9293,11 @@ var render = function () {
                         }),
                         _vm._v(" "),
                         _c("pin-annotated-item", {
-                          attrs: { item: annotation, "item-index": index },
+                          attrs: {
+                            item: annotation,
+                            "item-index": index,
+                            entries: _vm.meta.entries,
+                          },
                           on: {
                             delete: function ($event) {
                               return _vm.remove(index)
@@ -9851,7 +9947,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/framework000/CodeValet/fwk-statamic-test/addons/weareframework/pinpoint-image/resources/js/cp.js */"./resources/js/cp.js");
+module.exports = __webpack_require__(/*! /Users/nicolascanala/sites/ROX/heijmans-infra-wereld/addons/roxdigital/pinpoint-image/resources/js/cp.js */"./resources/js/cp.js");
 
 
 /***/ })

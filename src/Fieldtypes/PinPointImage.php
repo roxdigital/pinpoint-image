@@ -1,36 +1,39 @@
 <?php
 
-namespace Weareframework\PinpointImage\Fieldtypes;
+namespace Roxdigital\PinpointImage\Fieldtypes;
 
-use Illuminate\Support\Facades\Log;
-use Statamic\Exceptions\AssetContainerNotFoundException;
-use Statamic\Facades\Asset;
-use Statamic\Facades\AssetContainer;
-use Statamic\Facades\GraphQL;
-use Statamic\Fields\Fields as BlueprintFields;
-use Statamic\Fields\Fieldtype;
-use Statamic\Fieldtypes\Assets\DimensionsRule;
-use Statamic\Fieldtypes\Assets\ImageRule;
-use Statamic\Fieldtypes\Assets\MaxRule;
-use Statamic\Fieldtypes\Assets\MimesRule;
-use Statamic\Fieldtypes\Assets\MimetypesRule;
-use Statamic\Fieldtypes\Assets\MinRule;
-use Statamic\Fieldtypes\Assets\UndefinedContainerException;
-use Statamic\GraphQL\Types\AssetInterface;
-use Statamic\Http\Resources\CP\Assets\Asset as AssetResource;
 use Statamic\Support\Arr;
 use Statamic\Support\Str;
-use Weareframework\PinpointImage\GraphQL\PinPointImageFieldType;
+use Statamic\Facades\Entry;
+use Statamic\Facades\Asset;
+use Statamic\Facades\GraphQL;
+use Statamic\Fields\Fieldtype;
+use Illuminate\Support\Facades\Log;
+use Statamic\Facades\AssetContainer;
 use Statamic\GraphQL\Types\ArrayType;
+use Statamic\Fieldtypes\Assets\MaxRule;
+use Statamic\Fieldtypes\Assets\MinRule;
+use Statamic\Fieldtypes\Assets\ImageRule;
+use Statamic\Fieldtypes\Assets\MimesRule;
+use Statamic\GraphQL\Types\AssetInterface;
+use Statamic\Fieldtypes\Assets\MimetypesRule;
+use Statamic\Fields\Fields as BlueprintFields;
+use Statamic\Fieldtypes\Assets\DimensionsRule;
+use Statamic\Exceptions\AssetContainerNotFoundException;
+use Statamic\Fieldtypes\Assets\UndefinedContainerException;
+use Roxdigital\PinpointImage\GraphQL\PinPointImageFieldType;
+use Statamic\Http\Resources\CP\Assets\Asset as AssetResource;
 
 class PinPointImage extends Fieldtype
 {
     protected $categories = ['media', 'relationship'];
     protected $defaultValue = [
         'image' => '',
-        'annotations' => []
+        'annotations' => [],
+        'entries' => []
     ];
     protected $selectableInForms = true;
+    protected $entries = null;
 
     protected function configFieldItems(): array
     {
@@ -81,6 +84,12 @@ class PinPointImage extends Fieldtype
                 'default' => true,
                 'width' => 50,
             ],
+            'entries' => [
+                'display' => __('Entries'),
+                'instructions' => __('Select the entries that should be associated with this image'),
+                'type' => 'entries',
+                'max_items' => null,
+            ],
         ];
     }
 
@@ -94,15 +103,19 @@ class PinPointImage extends Fieldtype
      */
     public function preProcess($values)
     {
+        // dd($values['annotations']);
         if (is_null($values) || empty($values)) {
             return null;
         }
+
+        // $this->entries = $values['entries'] ?? null;
 
         return $values;
     }
 
     public function process($data)
-    {
+    {   
+        // $data['entries'] = $this->entries;
         return $data;
     }
 
@@ -113,15 +126,19 @@ class PinPointImage extends Fieldtype
 
     public function preload()
     {
+        $entries = Entry::whereCollection('pages');
+
         return [
             'default' => $this->defaultValue(),
             'data' => $this->getItemData($this->field->value() ?? []),
             'container' => $this->container()->handle(),
+            'entries' => $entries,
         ];
     }
 
     public function getItemData($items)
     {
+        // dd($items);
         return $items;
     }
 

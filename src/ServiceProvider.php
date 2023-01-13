@@ -1,12 +1,12 @@
 <?php
 
-namespace Weareframework\PinpointImage;
+namespace Roxdigital\PinpointImage;
 
 use Statamic\Facades\GraphQL;
 use Statamic\Providers\AddonServiceProvider;
-use Weareframework\PinpointImage\Fieldtypes\PinPointImage;
-use Weareframework\PinpointImage\GraphQL\PinPointImageFieldType;
-use Weareframework\PinpointImage\Tags\PinpointImageTag;
+use Roxdigital\PinpointImage\Fieldtypes\PinPointImage;
+use Roxdigital\PinpointImage\GraphQL\PinPointImageFieldType;
+use Roxdigital\PinpointImage\Tags\PinpointImageTag;
 use Statamic\Statamic;
 
 class ServiceProvider extends AddonServiceProvider

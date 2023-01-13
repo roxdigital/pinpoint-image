@@ -31,6 +31,14 @@
                     <label class="text-base font-bold mb-1">Heading</label>
                     <input type="text" v-model="item.data.heading" class="input-text mb-2">
 
+                    <select v-model="item.data.entries" @change="onSelectionChange">
+                       <option v-for="option in createEntriesObject()" v-bind:value="option.value">
+                          {{ option.label }}
+                        </option>
+                    </select>
+
+                    <p>The selected item is: {{ item.data.entries }}</p>
+
                     <div v-if="hasFields">
                         <label class="text-base font-bold mb-1">Fields</label>
                         <div
@@ -102,14 +110,19 @@ export default {
                 y: 0,
                 data: {
                     heading: '',
-                    fields: []
+                    fields: [],
+                    entries: []
                 },
             })
         },
         itemIndex: {
             type: Number,
             default: 0
-        }
+        },
+        entries: {
+            type: Array,
+            default: []
+        },
     },
     data() {
         return {
@@ -117,14 +130,20 @@ export default {
             modalOpen: false,
             heading: this.item.data.heading,
             fields: this.item.data.fields,
+            entries: this.entries,
+            selected: null,
             fieldtypes: [
                 // { icon:"bard", text:"Bard", value:"bard", content:'' },
                 // { icon:"html", text:"html", value:"html", content:'' },
+                { icon:"entries", text:"entries", value:"link", content:[] },
                 { icon:"markdown", text:"Markdown", value:"markdown", content:'' },
                 { icon:"text", text:"Text", value:"text", content:'' },
                 { icon:"textarea", text:"Textarea", value:"textarea", content:'' }
             ]
         }
+    },
+    mounted() {
+      // console.log(this.selected)
     },
     computed: {
         hasFields() {
@@ -155,7 +174,18 @@ export default {
         },
         cleanObject(obj) {
             return JSON.parse(JSON.stringify(obj))
-        }
+        },
+        createEntriesObject() {
+          return this.entries.map((entry) => {
+            return {
+              'label': entry.title,
+              'value': entry.id,
+            }
+          })
+        },
+        onSelectionChange() {
+          console.log(this.selected)
+        },
     }
 }
 </script>

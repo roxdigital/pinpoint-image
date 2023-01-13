@@ -7471,6 +7471,10 @@ __webpack_require__.r(__webpack_exports__);
       if (this.value.annotations.length > 0) {
         this.annotations = this.value.annotations;
       }
+
+      if (this.value.annotations.length > 0) {
+        this.annotations = this.value.annotations;
+      }
     }
   },
   data: function data() {
@@ -9401,7 +9405,13 @@ var render = function () {
                       "div",
                       {
                         staticClass: "pinpoint-annotate",
-                        style: { top: item.y + "%", left: item.x + "%" },
+                        style: {
+                          top: item.y + "%",
+                          left: item.x + "%",
+                          backgroundColor: item.data.color
+                            ? item.data.color
+                            : "#303750",
+                        },
                         attrs: { draggable: "true" },
                         on: {
                           dragend: function ($event) {

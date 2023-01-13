@@ -67,7 +67,7 @@
           <div
             v-if="annotations.length"
             v-for="(item, index) in annotations"
-            :style="{ top: item.y + '%', left: item.x + '%' }"
+            :style="{ top: item.y + '%', left: item.x + '%', backgroundColor: item.data.color ? item.data.color : '#303750' }"
             class="pinpoint-annotate"
             draggable="true"
             @dragend="dragEnd($event, item, index)"
@@ -108,6 +108,10 @@ export default {
       this.fieldValue = this.value;
       if (this.value.image !== null) {
         this.getImageAsset(this.value.image);
+      }
+
+      if (this.value.annotations.length > 0) {
+        this.annotations = this.value.annotations;
       }
 
       if (this.value.annotations.length > 0) {

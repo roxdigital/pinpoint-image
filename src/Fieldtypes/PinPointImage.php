@@ -30,7 +30,8 @@ class PinPointImage extends Fieldtype
     protected $defaultValue = [
         'image' => '',
         'annotations' => [],
-        'entries' => []
+        'entries' => [],
+        'color' => '',
     ];
     protected $selectableInForms = true;
 

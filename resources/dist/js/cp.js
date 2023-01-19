@@ -7185,54 +7185,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     item: {
@@ -7443,6 +7395,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -7453,10 +7406,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   mixins: [Fieldtype, _sortable_Sortable__WEBPACK_IMPORTED_MODULE_1__["SortableHelpers"]],
   mounted: function mounted() {
-    console.log({
-      value: this.value
-    });
-
     if (this.config.max_files === undefined) {
       this.config.max_files = 1;
     }
@@ -7597,42 +7546,17 @@ __webpack_require__.r(__webpack_exports__);
       this.fieldValue.annotations = this.annotations;
     },
     getXyPosition: function getXyPosition(e) {
-      var position = this.getPosition(e.currentTarget);
-      var xPosition = e.clientX - position.x - 40 / 2;
-      var yPosition = e.clientY - position.y - 40 / 2;
-      var width = this.$refs.floorplan.clientWidth;
-      var height = this.$refs.floorplan.clientHeight; // convert position to percentage values
+      var position = e.currentTarget.getBoundingClientRect();
+      var xPosition = e.clientX - position.x;
+      var yPosition = e.clientY - position.y;
+      var width = position.width;
+      var height = position.height; // convert position to percentage values
 
       var x = this.roundUp(xPosition / width * 100, 0);
       var y = this.roundUp(yPosition / height * 100, 0);
       return {
         x: x,
         y: y
-      };
-    },
-    getPosition: function getPosition(el) {
-      var xPos = 0;
-      var yPos = 0;
-
-      while (el) {
-        if (el.tagName === "BODY") {
-          // deal with browser quirks with body/window/document and page scroll
-          var xScroll = el.scrollLeft || document.documentElement.scrollLeft;
-          var yScroll = el.scrollTop || document.documentElement.scrollTop;
-          xPos += el.offsetLeft - xScroll + el.clientLeft;
-          yPos += el.offsetTop - yScroll + el.clientTop;
-        } else {
-          // for all other non-BODY elements
-          xPos += el.offsetLeft - el.scrollLeft + el.clientLeft;
-          yPos += el.offsetTop - el.scrollTop + el.clientTop;
-        }
-
-        el = el.offsetParent;
-      }
-
-      return {
-        x: xPos,
-        y: yPos
       };
     },
     remove: function remove(index) {
@@ -7649,7 +7573,7 @@ __webpack_require__.r(__webpack_exports__);
     }, 500),
     roundUp: function roundUp(num, precision) {
       precision = Math.pow(10, precision);
-      return Math.ceil(num * precision) / precision;
+      return num;
     },
     isNull: function isNull(value) {
       return value === null;
@@ -8979,195 +8903,10 @@ var render = function () {
                     ],
                     1
                   ),
-                  _vm._v(" "),
-                  _vm.hasFields
-                    ? _c(
-                        "div",
-                        [
-                          _c(
-                            "label",
-                            { staticClass: "text-base font-bold mb-1" },
-                            [_vm._v("Fields")]
-                          ),
-                          _vm._v(" "),
-                          _vm._l(
-                            _vm.item.data.fields,
-                            function (field, fIndex) {
-                              return _c(
-                                "div",
-                                { key: fIndex, staticClass: "w-full pb-4" },
-                                [
-                                  _c(field.value + "-fieldtype", {
-                                    tag: "component",
-                                    attrs: {
-                                      value: field.content,
-                                      handle: field.value + "_field",
-                                      "name-prefix": "",
-                                      "error-key-prefix": "",
-                                      "read-only": false,
-                                      "deed-eded": "$emit('input', $event)",
-                                    },
-                                    on: {
-                                      "update:value": function ($event) {
-                                        return _vm.$set(
-                                          field,
-                                          "content",
-                                          $event
-                                        )
-                                      },
-                                      input: function ($event) {
-                                        return _vm.updateFieldContent(
-                                          $event,
-                                          field,
-                                          fIndex
-                                        )
-                                      },
-                                      "meta-updated": function ($event) {
-                                        return _vm.$emit("meta-updated", $event)
-                                      },
-                                      focus: _vm.focused,
-                                    },
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    { staticClass: "flex justify-end mt-1" },
-                                    [
-                                      _c(
-                                        "a",
-                                        {
-                                          directives: [
-                                            {
-                                              name: "tooltip",
-                                              rawName: "v-tooltip",
-                                              value: "Delete field",
-                                              expression: "'Delete field'",
-                                            },
-                                          ],
-                                          staticClass: "text-xs",
-                                          attrs: { href: "#" },
-                                          on: {
-                                            click: function ($event) {
-                                              $event.preventDefault()
-                                              return _vm.removeField(
-                                                field,
-                                                fIndex
-                                              )
-                                            },
-                                          },
-                                        },
-                                        [
-                                          _c("svg-icon", {
-                                            staticClass: "w-4 h-4",
-                                            attrs: { name: "trash" },
-                                          }),
-                                        ],
-                                        1
-                                      ),
-                                    ]
-                                  ),
-                                ],
-                                1
-                              )
-                            }
-                          ),
-                        ],
-                        2
-                      )
-                    : _vm._e(),
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "mt-5" }, [
-                  _vm.isSelectingNewFieldtype
-                    ? _c("div", [
-                        _c("div", { staticClass: "fieldtype-selector" }, [
-                          _c(
-                            "div",
-                            { staticClass: "fieldtype-list" },
-                            _vm._l(
-                              _vm.fieldtypes,
-                              function (fieldtype, findex) {
-                                return _c(
-                                  "div",
-                                  { key: findex, staticClass: "p-1" },
-                                  [
-                                    _c(
-                                      "button",
-                                      {
-                                        staticClass:
-                                          "bg-white border border-grey-50 flex items-center group w-full rounded hover:border-grey-60 shadow-sm hover:shadow-md pr-1.5",
-                                        on: {
-                                          click: function ($event) {
-                                            return _vm.select(fieldtype)
-                                          },
-                                        },
-                                      },
-                                      [
-                                        _c(
-                                          "div",
-                                          {
-                                            staticClass:
-                                              "p-1 flex items-center border-r border-grey-50 group-hover:border-grey-60 bg-grey-20 rounded-l",
-                                          },
-                                          [
-                                            _c("svg-icon", {
-                                              staticClass:
-                                                "h-5 w-5 text-grey-80",
-                                              attrs: {
-                                                name: fieldtype.icon,
-                                                default: "generic-field",
-                                              },
-                                            }),
-                                          ],
-                                          1
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "span",
-                                          {
-                                            staticClass:
-                                              "pl-1.5 text-grey-80 text-md group-hover:text-grey-90",
-                                          },
-                                          [_vm._v(_vm._s(fieldtype.text))]
-                                        ),
-                                      ]
-                                    ),
-                                  ]
-                                )
-                              }
-                            ),
-                            0
-                          ),
-                        ]),
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
+                _c("div", { staticClass: "mt-2" }, [
                   _c("div", { staticClass: "flex flex-row justify-between" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass:
-                          "btn w-auto flex justify-center items-center",
-                        on: {
-                          click: function ($event) {
-                            _vm.isSelectingNewFieldtype = true
-                          },
-                        },
-                      },
-                      [
-                        _c("svg-icon", {
-                          staticClass: "mr-1 w-4 h-4",
-                          attrs: { name: "wireframe" },
-                        }),
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(_vm.__("Add Field")) +
-                            "\n                    "
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
                     _c(
                       "button",
                       {
@@ -9396,6 +9135,9 @@ var render = function () {
                       "div",
                       {
                         staticClass: "pinpoint-annotate",
+                        staticStyle: {
+                          transform: "translate(-50%, -100%) rotate(45deg)",
+                        },
                         style: {
                           top: item.y + "%",
                           left: item.x + "%",

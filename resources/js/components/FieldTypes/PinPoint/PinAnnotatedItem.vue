@@ -50,59 +50,11 @@
                         :config="colorConfig"
                       ></color-fieldtype>
                     </div>
-
-                    <div v-if="hasFields">
-                        <label class="text-base font-bold mb-1">Fields</label>
-                        <div
-                            class="w-full pb-4"
-                            v-for="(field, fIndex) in item.data.fields"
-                            :key="fIndex"
-                        >
-                            <component
-                                :is="`${field.value}-fieldtype`"
-                                :value.sync="field.content"
-                                :handle="`${field.value}_field`"
-                                name-prefix=""
-                                error-key-prefix=""
-                                :read-only="false"
-                                deed-eded="$emit('input', $event)"
-                                @input="updateFieldContent($event, field, fIndex)"
-                                @meta-updated="$emit('meta-updated', $event)"
-                                @focus="focused"
-                            />
-                            <div class="flex justify-end mt-1">
-                                <a href="#" @click.prevent="removeField(field, fIndex)" class="text-xs" v-tooltip="'Delete field'">
-                                    <svg-icon name="trash" class="w-4 h-4" />
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
-                <div class="mt-5">
-                    <div v-if="isSelectingNewFieldtype">
-                        <div class="fieldtype-selector">
-                            <div class="fieldtype-list">
-                                <div class="p-1" v-for="(fieldtype, findex) in fieldtypes" :key="findex">
-                                    <button
-                                        class="bg-white border border-grey-50 flex items-center group w-full rounded hover:border-grey-60 shadow-sm hover:shadow-md pr-1.5"
-                                        @click="select(fieldtype)"
-                                    >
-                                        <div class="p-1 flex items-center border-r border-grey-50 group-hover:border-grey-60 bg-grey-20 rounded-l">
-                                            <svg-icon class="h-5 w-5 text-grey-80" :name="fieldtype.icon" default="generic-field"></svg-icon>
-                                        </div>
-                                        <span class="pl-1.5 text-grey-80 text-md group-hover:text-grey-90">{{ fieldtype.text }}</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
+                <!-- Close button -->
+                <div class="mt-2">
                     <div class="flex flex-row justify-between">
-                        <button class="btn w-auto flex justify-center items-center" @click="isSelectingNewFieldtype = true;">
-                            <svg-icon name="wireframe" class="mr-1 w-4 h-4" />
-                            {{ __('Add Field') }}
-                        </button>
                         <button class="btn-primary w-auto ml-auto flex justify-center items-center" @click="modalOpen = false">
                             {{ __('Close') }}
                         </button>

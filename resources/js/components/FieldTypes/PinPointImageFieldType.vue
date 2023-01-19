@@ -68,6 +68,7 @@
             v-if="annotations.length"
             v-for="(item, index) in annotations"
             :style="{ top: item.y + '%', left: item.x + '%', backgroundColor: item.data.color ? item.data.color : '#303750' }"
+            style="transform: translate(-50%, -100%) rotate(45deg);"
             class="pinpoint-annotate"
             draggable="true"
             @dragend="dragEnd($event, item, index)"
@@ -98,8 +99,6 @@ export default {
   mixins: [Fieldtype, SortableHelpers],
 
   mounted() {
-    console.log({value: this.value})
-
     if (this.config.max_files === undefined) {
       this.config.max_files = 1;
     }
@@ -242,12 +241,12 @@ export default {
     },
 
     getXyPosition(e) {
-      const position = this.getPosition(e.currentTarget);
-      const xPosition = e.clientX - position.x - 40 / 2;
-      const yPosition = e.clientY - position.y - 40 / 2;
+      const position = e.currentTarget.getBoundingClientRect();
+      const xPosition = e.clientX - position.x;
+      const yPosition = e.clientY - position.y;
 
-      const width = this.$refs.floorplan.clientWidth;
-      const height = this.$refs.floorplan.clientHeight;
+      const width = position.width;
+      const height = position.height;
 
       // convert position to percentage values
       let x = this.roundUp((xPosition / width) * 100, 0);
@@ -256,33 +255,6 @@ export default {
       return {
         x,
         y,
-      };
-    },
-
-    getPosition(el) {
-      let xPos = 0;
-      let yPos = 0;
-
-      while (el) {
-        if (el.tagName === "BODY") {
-          // deal with browser quirks with body/window/document and page scroll
-          const xScroll = el.scrollLeft || document.documentElement.scrollLeft;
-          const yScroll = el.scrollTop || document.documentElement.scrollTop;
-
-          xPos += el.offsetLeft - xScroll + el.clientLeft;
-          yPos += el.offsetTop - yScroll + el.clientTop;
-        } else {
-          // for all other non-BODY elements
-          xPos += el.offsetLeft - el.scrollLeft + el.clientLeft;
-          yPos += el.offsetTop - el.scrollTop + el.clientTop;
-        }
-
-        el = el.offsetParent;
-      }
-
-      return {
-        x: xPos,
-        y: yPos,
       };
     },
 
@@ -304,7 +276,7 @@ export default {
 
     roundUp(num, precision) {
       precision = Math.pow(10, precision);
-      return Math.ceil(num * precision) / precision;
+      return num;
     },
 
     isNull(value) {

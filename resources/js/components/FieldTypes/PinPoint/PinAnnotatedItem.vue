@@ -39,17 +39,17 @@
                             {{ option.label }}
                           </option>
                       </select>
-
-                      <p class="text-sm text-gray-100">The selected page is: 
-                        <span class="font-bold not-italic text-sm">{{ item.data.entries }}</span>
-                      </p>
                     </div>
 
-                    <color-fieldtype 
-                      v-model="item.data.color"
-                      :isReadOnly="false"
-                      :config="colorConfig"
-                    ></color-fieldtype>
+                    <div class="flex flex-col gap-2 mt-2">
+                      <p class="text-base font-bold">Marker color</p>
+
+                      <color-fieldtype 
+                        v-model="item.data.color"
+                        :isReadOnly="false"
+                        :config="colorConfig"
+                      ></color-fieldtype>
+                    </div>
 
                     <div v-if="hasFields">
                         <label class="text-base font-bold mb-1">Fields</label>

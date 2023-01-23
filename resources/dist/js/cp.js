@@ -7185,6 +7185,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     item: {
@@ -8881,6 +8891,23 @@ var render = function () {
                       0
                     ),
                   ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "flex flex-col gap-2 mt-2" },
+                    [
+                      _c("p", { staticClass: "text-base font-bold" }, [
+                        _vm._v("Icon"),
+                      ]),
+                      _vm._v(" "),
+                      _c("font-awesome", [
+                        _vm._v(
+                          "\n                    Hello\n                  "
+                        ),
+                      ]),
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
                   _c(
                     "div",

@@ -41,6 +41,16 @@
                       </select>
                     </div>
 
+                    <!-- FA Icons -->
+                    <div class="flex flex-col gap-2 mt-2">
+                      <p class="text-base font-bold">Icon</p>
+
+                      <font-awesome>
+                        Hello
+                      </font-awesome>
+                    </div>
+
+                    <!-- Color picker -->
                     <div class="flex flex-col gap-2 mt-2">
                       <p class="text-base font-bold">Marker color</p>
 

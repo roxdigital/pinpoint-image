@@ -1,21 +1,23 @@
 <section class="pinpoint-image">
-    @if(isset($image['url']))
+    @dd('test')
+    @if (isset($image['url']))
         <img class="pinpoint-image__image" src="{{ $image['url'] ?? '' }}">
     @endif
-    @if(isset($annotations) && count($annotations) > 0)
-        @foreach($annotations as $key => $annotation)
-            <div class="pinpoint-image__annotation" style="top: {{ $annotation['y'] ?? 0 }}%; left: {{ $annotation['x'] ?? 0 }}%;">
+    @if (isset($annotations) && count($annotations) > 0)
+        @foreach ($annotations as $key => $annotation)
+            <div class="pinpoint-image__annotation"
+                style="top: {{ $annotation['y'] ?? 0 }}%; left: {{ $annotation['x'] ?? 0 }}%;">
                 <a href="#" class="pinpoint-image__annotationKey">
                     <div class="pinpoint-image__annotationKeyInner">
-                        {{ ($key + 1) }}
+                        {{ $key + 1 }}
                     </div>
                 </a>
                 <div class="pinpoint-image__annotationHover">
                     {{ $annotation['data']['heading'] ?? '' }}
-                    @if(isset($annotation['data']['fields']) && is_array($annotation['data']['fields']))
-                        @foreach($annotation['data']['fields'] as $field)
+                    @if (isset($annotation['data']['fields']) && is_array($annotation['data']['fields']))
+                        @foreach ($annotation['data']['fields'] as $field)
                             <div class="mb-4">
-                                @if($field['value'] === 'markdown')
+                                @if ($field['value'] === 'markdown')
                                     {{ Illuminate\Mail\Markdown::parse($field['content']) }}
                                 @else
                                     {{ $field['content'] ?? '' }}
@@ -33,13 +35,16 @@
     .pinpoint-image {
         position: relative;
     }
+
     .pinpoint-image__image {
         position: relative;
         width: 100%;
     }
+
     .pinpoint-image__annotation {
         position: absolute;
     }
+
     .pinpoint-image__annotationKey {
         position: absolute;
         z-index: 1;
@@ -55,9 +60,11 @@
         font-size: 12px;
         cursor: pointer;
     }
+
     .pinpoint-image__annotationKeyInner {
         transform: rotate(-45deg);
     }
+
     .pinpoint-image__annotationHover {
         position: relative;
         z-index: 5;
@@ -70,9 +77,10 @@
         pointer-events: none;
         display: none;
     }
-    .pinpoint-image__annotationKey:hover + .pinpoint-image__annotationHover,
-    .pinpoint-image__annotationKey:focus ~ .pinpoint-image__annotationHover,
-    .pinpoint-image__annotationKey:active + .pinpoint-image__annotationHover {
+
+    .pinpoint-image__annotationKey:hover+.pinpoint-image__annotationHover,
+    .pinpoint-image__annotationKey:focus~.pinpoint-image__annotationHover,
+    .pinpoint-image__annotationKey:active+.pinpoint-image__annotationHover {
         display: block;
     }
 </style>

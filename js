@@ -1,0 +1,1 @@
+../../../addons/roxdigital/pinpoint-image/resources/dist/js/

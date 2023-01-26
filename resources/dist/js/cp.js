@@ -7195,7 +7195,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [Fieldtype],
   props: {
     item: {
       type: Object,
@@ -7204,10 +7209,12 @@ __webpack_require__.r(__webpack_exports__);
           x: 0,
           y: 0,
           data: {
-            heading: '',
+            heading: "",
             fields: [],
             entries: [],
-            color: ''
+            icons: [],
+            color: "",
+            icon: ""
           }
         };
       }
@@ -7219,6 +7226,10 @@ __webpack_require__.r(__webpack_exports__);
     entries: {
       type: Array,
       "default": []
+    },
+    icons: {
+      type: Array,
+      "default": []
     }
   },
   data: function data() {
@@ -7228,44 +7239,33 @@ __webpack_require__.r(__webpack_exports__);
       heading: this.item.data.heading,
       fields: this.item.data.fields,
       entries: this.entries,
+      icons: this.icons,
       selected: null,
-      fieldtypes: [{
-        icon: "entries",
-        text: "entries",
-        value: "link",
-        content: []
-      }, {
-        icon: "markdown",
-        text: "Markdown",
-        value: "markdown",
-        content: ''
-      }, {
-        icon: "text",
-        text: "Text",
-        value: "text",
-        content: ''
-      }, {
-        icon: "textarea",
-        text: "Textarea",
-        value: "textarea",
-        content: ''
-      }],
+      icon: "",
       colorConfig: {
         lock_opacity: true,
-        swatches: ['#f44336', '#e91e63', '#9c27b0'],
-        theme: 'classic',
-        default_color_mode: 'HEX',
-        "default": '#f44336',
-        color_modes: ['hex', 'rgba']
-      },
-      colorValue: '#f44336'
+        swatches: ["#f44336", "#e91e63", "#9c27b0"],
+        theme: "classic",
+        default_color_mode: "HEX",
+        "default": "#f44336",
+        color_modes: ["hex", "rgba"]
+      }
     };
-  },
-  mounted: function mounted() {// console.log(this.selected)
   },
   computed: {
     hasFields: function hasFields() {
       return this.item.data.fields !== undefined && this.item.data.fields.length > 0;
+    },
+    iconOptions: function iconOptions() {
+      return this.icons.map(function (icon) {
+        return {
+          label: icon.title,
+          value: icon.id
+        };
+      });
+    },
+    iconOptions2: function iconOptions2() {
+      return this.icons;
     }
   },
   methods: {
@@ -7289,8 +7289,8 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     remove: function remove() {
-      if (confirm('Are you sure?')) {
-        this.$emit('delete', this.index);
+      if (confirm("Are you sure?")) {
+        this.$emit("delete", this.index);
       }
     },
     cleanObject: function cleanObject(obj) {
@@ -7299,8 +7299,8 @@ __webpack_require__.r(__webpack_exports__);
     createEntriesObject: function createEntriesObject() {
       return this.entries.map(function (entry) {
         return {
-          'label': entry.title,
-          'value': entry.url
+          "label": entry.title,
+          "value": entry.url
         };
       });
     },
@@ -7323,6 +7323,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _PinPoint_PinAnnotatedItem__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PinPoint/PinAnnotatedItem */ "./resources/js/components/FieldTypes/PinPoint/PinAnnotatedItem.vue");
 /* harmony import */ var _sortable_Sortable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../sortable/Sortable */ "./resources/js/sortable/Sortable.js");
+//
 //
 //
 //
@@ -8881,9 +8882,9 @@ var render = function () {
                           { domProps: { value: option.value } },
                           [
                             _vm._v(
-                              "\n                        " +
+                              "\n              " +
                                 _vm._s(option.label) +
-                                "\n                      "
+                                "\n            "
                             ),
                           ]
                         )
@@ -8900,11 +8901,27 @@ var render = function () {
                         _vm._v("Icon"),
                       ]),
                       _vm._v(" "),
-                      _c("font-awesome", [
-                        _vm._v(
-                          "\n                    Hello\n                  "
-                        ),
-                      ]),
+                      _c("select-input", {
+                        attrs: { options: _vm.iconOptions },
+                        model: {
+                          value: _vm.item.data.icon,
+                          callback: function ($$v) {
+                            _vm.$set(_vm.item.data, "icon", $$v)
+                          },
+                          expression: "item.data.icon",
+                        },
+                      }),
+                      _vm._v(" "),
+                      _c("relationship-input", {
+                        attrs: { config: { items: _vm.iconOptions2 } },
+                        model: {
+                          value: _vm.item.data.icon,
+                          callback: function ($$v) {
+                            _vm.$set(_vm.item.data, "icon", $$v)
+                          },
+                          expression: "item.data.icon",
+                        },
+                      }),
                     ],
                     1
                   ),
@@ -8947,9 +8964,9 @@ var render = function () {
                       },
                       [
                         _vm._v(
-                          "\n                        " +
+                          "\n            " +
                             _vm._s(_vm.__("Close")) +
-                            "\n                    "
+                            "\n          "
                         ),
                       ]
                     ),
@@ -9121,6 +9138,7 @@ var render = function () {
                             item: annotation,
                             "item-index": index,
                             entries: _vm.meta.entries,
+                            icons: _vm.meta.icons,
                           },
                           on: {
                             delete: function ($event) {
@@ -9780,7 +9798,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/nicolascanala/sites/ROX/heijmans-infra-wereld/addons/roxdigital/pinpoint-image/resources/js/cp.js */"./resources/js/cp.js");
+module.exports = __webpack_require__(/*! /Users/patrickdokter/repositories/slimmeinfra.nl/addons/roxdigital/pinpoint-image/resources/js/cp.js */"./resources/js/cp.js");
 
 
 /***/ })

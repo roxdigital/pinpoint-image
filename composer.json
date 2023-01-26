@@ -1,7 +1,8 @@
 {
     "name": "roxdigital/pinpoint-image",
     "require": {
-        "php": "^7.4|^8.0"
+        "php": "^7.4|^8.0",
+        "aerni/font-awesome": "^1.2"
     },
     "autoload": {
         "psr-4": {
@@ -17,6 +18,11 @@
             "providers": [
                 "Roxdigital\\PinpointImage\\ServiceProvider"
             ]
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "pixelfear/composer-dist-plugin": true
         }
     }
 }

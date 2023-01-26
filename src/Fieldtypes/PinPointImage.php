@@ -2,6 +2,8 @@
 
 namespace Roxdigital\PinpointImage\Fieldtypes;
 
+use Statamic\Facades\Term;
+use Statamic\GraphQL\Queries\TaxonomyQuery;
 use Statamic\Support\Arr;
 use Statamic\Support\Str;
 use Statamic\Facades\Entry;
@@ -23,6 +25,8 @@ use Statamic\Exceptions\AssetContainerNotFoundException;
 use Statamic\Fieldtypes\Assets\UndefinedContainerException;
 use Roxdigital\PinpointImage\GraphQL\PinPointImageFieldType;
 use Statamic\Http\Resources\CP\Assets\Asset as AssetResource;
+use Statamic\Tags\Tags;
+use Statamic\Taxonomies\Taxonomy;
 
 class PinPointImage extends Fieldtype
 {
@@ -32,6 +36,10 @@ class PinPointImage extends Fieldtype
         'annotations' => [],
         'entries' => [],
         'color' => '',
+        'icon' => '',
+        'map_category' => '',
+        'map_categories' => [],
+        'icons' => []
     ];
     protected $selectableInForms = true;
 
@@ -117,12 +125,16 @@ class PinPointImage extends Fieldtype
     public function preload()
     {
         $entries = Entry::whereCollection('pages');
+        $mapCategories = Term::whereTaxonomy('map_category');
+        $icons = Term::whereTaxonomy('icons');
 
         return [
             'default' => $this->defaultValue(),
             'data' => $this->getItemData($this->field->value() ?? []),
             'container' => $this->container()->handle(),
             'entries' => $entries,
+            'map_categories' => $mapCategories,
+            'icons' => $icons
         ];
     }
 

@@ -52,6 +52,7 @@
                 :item.sync="annotation"
                 :item-index="index"
                 :entries="meta.entries"
+                :icons="meta.icons"
                 style="padding: 8px 14px !important;"
               ></pin-annotated-item>
             </div>

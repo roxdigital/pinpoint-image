@@ -50,7 +50,11 @@
               v-model="item.data.icon"
             ></select-input>
 
-            <relationship-input v-model="item.data.icon" :config="{items: iconOptions2}"></relationship-input>
+            <relationship-input v-model="item.data.icon" :config="{
+                type: 'entries',
+                collections: this.icons,
+                max_items: 11,
+            }"></relationship-input>
           </div>
 
 

@@ -7199,6 +7199,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mixins: [Fieldtype],
   props: {
@@ -8913,7 +8917,13 @@ var render = function () {
                       }),
                       _vm._v(" "),
                       _c("relationship-input", {
-                        attrs: { config: { items: _vm.iconOptions2 } },
+                        attrs: {
+                          config: {
+                            type: "entries",
+                            collections: this.icons,
+                            max_items: 11,
+                          },
+                        },
                         model: {
                           value: _vm.item.data.icon,
                           callback: function ($$v) {

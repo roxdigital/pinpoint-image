@@ -7201,8 +7201,55 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mixins: [Fieldtype],
+  mounted: function mounted() {
+    console.log(this.item.data.entries);
+  },
   props: {
     item: {
       type: Object,
@@ -7212,7 +7259,6 @@ __webpack_require__.r(__webpack_exports__);
           y: 0,
           data: {
             heading: "",
-            fields: [],
             entries: [],
             icons: [],
             color: ""
@@ -7235,13 +7281,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      isSelectingNewFieldtype: false,
       modalOpen: false,
       heading: this.item.data.heading,
-      fields: this.item.data.fields,
       entries: this.entries,
       icons: this.icons,
-      selected: null,
       colorConfig: {
         lock_opacity: true,
         swatches: ["#f44336", "#e91e63", "#9c27b0"],
@@ -7252,52 +7295,29 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
   },
-  computed: {
-    hasFields: function hasFields() {
-      return this.item.data.fields !== undefined && this.item.data.fields.length > 0;
-    }
-  },
+  computed: {},
   methods: {
-    select: function select(fieldType) {
-      if (this.item.data.fields === undefined) {
-        this.item.data.fields = [];
-      }
-
-      this.item.data.fields.push(this.cleanObject(fieldType));
-      this.isSelectingNewFieldtype = false;
-    },
-    updateFieldContent: function updateFieldContent($event, field, fIndex) {
-      field.content = $event;
-    },
     edit: function edit() {
       this.modalOpen = true;
-    },
-    removeField: function removeField(field, fIndex) {
-      this.item.data.fields = this.item.data.fields.filter(function (item) {
-        return item.content !== field.content;
-      });
     },
     remove: function remove() {
       if (confirm("Are you sure?")) {
         this.$emit("delete", this.index);
       }
     },
-    cleanObject: function cleanObject(obj) {
-      return JSON.parse(JSON.stringify(obj));
-    },
     createEntriesObject: function createEntriesObject() {
       return this.entries.map(function (entry) {
         return {
-          "label": entry.title,
-          "value": entry.url
+          label: entry.title,
+          value: entry.url
         };
       });
     },
     createIconsObject: function createIconsObject() {
       return this.icons.map(function (icon) {
         return {
-          "label": icon.title,
-          "value": icon.fa_icon
+          label: icon.title,
+          value: icon.fa_icon
         };
       });
     },
@@ -7320,9 +7340,6 @@ __webpack_require__.r(__webpack_exports__);
 
         (_this$item$data$icons5 = this.item.data.icons) === null || _this$item$data$icons5 === void 0 ? void 0 : _this$item$data$icons5.push(value);
       }
-    },
-    onSelectionChange: function onSelectionChange() {
-      console.log(this.item.data.icons);
     }
   }
 });
@@ -7773,6 +7790,25 @@ function move(items, oldIndex, newIndex) {
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FieldTypes/PinPoint/PinAnnotatedItem.vue?vue&type=style&index=0&id=118f9b76&scoped=true&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--5-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--5-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/FieldTypes/PinPoint/PinAnnotatedItem.vue?vue&type=style&index=0&id=118f9b76&scoped=true&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.btn[data-v-118f9b76] {\n  max-width: min-content;\n  padding: 5px 10px;\n  border: 1px solid gray;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FieldTypes/PinPointImageFieldType.vue?vue&type=style&index=0&lang=css&":
 /*!***************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--5-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--5-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/FieldTypes/PinPointImageFieldType.vue?vue&type=style&index=0&lang=css& ***!
@@ -8090,6 +8126,36 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FieldTypes/PinPoint/PinAnnotatedItem.vue?vue&type=style&index=0&id=118f9b76&scoped=true&lang=css&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--5-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--5-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/FieldTypes/PinPoint/PinAnnotatedItem.vue?vue&type=style&index=0&id=118f9b76&scoped=true&lang=css& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--5-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--5-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./PinAnnotatedItem.vue?vue&type=style&index=0&id=118f9b76&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FieldTypes/PinPoint/PinAnnotatedItem.vue?vue&type=style&index=0&id=118f9b76&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
 
 /***/ }),
 
@@ -8704,10 +8770,10 @@ function now(){
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FieldTypes/PinPoint/PinAnnotatedItem.vue?vue&type=template&id=118f9b76&":
-/*!***************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/FieldTypes/PinPoint/PinAnnotatedItem.vue?vue&type=template&id=118f9b76& ***!
-  \***************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FieldTypes/PinPoint/PinAnnotatedItem.vue?vue&type=template&id=118f9b76&scoped=true&":
+/*!***************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/FieldTypes/PinPoint/PinAnnotatedItem.vue?vue&type=template&id=118f9b76&scoped=true& ***!
+  \***************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -8823,13 +8889,13 @@ var render = function () {
                   _c("h2", [_vm._v("Content")]),
                   _vm._v(" "),
                   _c("p", { staticClass: "max-w-lg" }, [
-                    _vm._v("Edit your pinpoints content here:"),
+                    _vm._v("Edit your marker content here:"),
                   ]),
                 ]),
                 _vm._v(" "),
                 _c("div", [
                   _c("label", { staticClass: "text-base font-bold mb-1" }, [
-                    _vm._v("Heading"),
+                    _vm._v("Label"),
                   ]),
                   _vm._v(" "),
                   _c("input", {
@@ -8917,13 +8983,14 @@ var render = function () {
                       ? _c(
                           "button",
                           {
+                            staticClass: "btn",
                             on: {
                               click: function ($event) {
                                 _vm.item.data.icons = undefined
                               },
                             },
                           },
-                          [_vm._v("Clear icons")]
+                          [_vm._v("\n            Clear icons\n          ")]
                         )
                       : _vm._e(),
                     _vm._v(" "),
@@ -8942,26 +9009,23 @@ var render = function () {
                         attrs: { multiple: "" },
                         on: {
                           input: _vm.toggleIcon,
-                          change: [
-                            function ($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function (o) {
-                                  return o.selected
-                                })
-                                .map(function (o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.$set(
-                                _vm.item.data,
-                                "icons",
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              )
-                            },
-                            _vm.onSelectionChange,
-                          ],
+                          change: function ($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function (o) {
+                                return o.selected
+                              })
+                              .map(function (o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.item.data,
+                              "icons",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          },
                         },
                       },
                       _vm._l(_vm.createIconsObject(), function (option) {
@@ -9401,9 +9465,11 @@ function normalizeComponent (
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _PinAnnotatedItem_vue_vue_type_template_id_118f9b76___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PinAnnotatedItem.vue?vue&type=template&id=118f9b76& */ "./resources/js/components/FieldTypes/PinPoint/PinAnnotatedItem.vue?vue&type=template&id=118f9b76&");
+/* harmony import */ var _PinAnnotatedItem_vue_vue_type_template_id_118f9b76_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PinAnnotatedItem.vue?vue&type=template&id=118f9b76&scoped=true& */ "./resources/js/components/FieldTypes/PinPoint/PinAnnotatedItem.vue?vue&type=template&id=118f9b76&scoped=true&");
 /* harmony import */ var _PinAnnotatedItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PinAnnotatedItem.vue?vue&type=script&lang=js& */ "./resources/js/components/FieldTypes/PinPoint/PinAnnotatedItem.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _PinAnnotatedItem_vue_vue_type_style_index_0_id_118f9b76_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PinAnnotatedItem.vue?vue&type=style&index=0&id=118f9b76&scoped=true&lang=css& */ "./resources/js/components/FieldTypes/PinPoint/PinAnnotatedItem.vue?vue&type=style&index=0&id=118f9b76&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -9411,13 +9477,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _PinAnnotatedItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _PinAnnotatedItem_vue_vue_type_template_id_118f9b76___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _PinAnnotatedItem_vue_vue_type_template_id_118f9b76___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _PinAnnotatedItem_vue_vue_type_template_id_118f9b76_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _PinAnnotatedItem_vue_vue_type_template_id_118f9b76_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  null,
+  "118f9b76",
   null
   
 )
@@ -9443,19 +9509,35 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/FieldTypes/PinPoint/PinAnnotatedItem.vue?vue&type=template&id=118f9b76&":
-/*!*********************************************************************************************************!*\
-  !*** ./resources/js/components/FieldTypes/PinPoint/PinAnnotatedItem.vue?vue&type=template&id=118f9b76& ***!
-  \*********************************************************************************************************/
+/***/ "./resources/js/components/FieldTypes/PinPoint/PinAnnotatedItem.vue?vue&type=style&index=0&id=118f9b76&scoped=true&lang=css&":
+/*!***********************************************************************************************************************************!*\
+  !*** ./resources/js/components/FieldTypes/PinPoint/PinAnnotatedItem.vue?vue&type=style&index=0&id=118f9b76&scoped=true&lang=css& ***!
+  \***********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PinAnnotatedItem_vue_vue_type_style_index_0_id_118f9b76_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader??ref--5-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--5-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./PinAnnotatedItem.vue?vue&type=style&index=0&id=118f9b76&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FieldTypes/PinPoint/PinAnnotatedItem.vue?vue&type=style&index=0&id=118f9b76&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PinAnnotatedItem_vue_vue_type_style_index_0_id_118f9b76_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PinAnnotatedItem_vue_vue_type_style_index_0_id_118f9b76_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PinAnnotatedItem_vue_vue_type_style_index_0_id_118f9b76_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_5_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_5_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PinAnnotatedItem_vue_vue_type_style_index_0_id_118f9b76_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
+
+/***/ }),
+
+/***/ "./resources/js/components/FieldTypes/PinPoint/PinAnnotatedItem.vue?vue&type=template&id=118f9b76&scoped=true&":
+/*!*********************************************************************************************************************!*\
+  !*** ./resources/js/components/FieldTypes/PinPoint/PinAnnotatedItem.vue?vue&type=template&id=118f9b76&scoped=true& ***!
+  \*********************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PinAnnotatedItem_vue_vue_type_template_id_118f9b76___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./PinAnnotatedItem.vue?vue&type=template&id=118f9b76& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FieldTypes/PinPoint/PinAnnotatedItem.vue?vue&type=template&id=118f9b76&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PinAnnotatedItem_vue_vue_type_template_id_118f9b76___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PinAnnotatedItem_vue_vue_type_template_id_118f9b76_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./PinAnnotatedItem.vue?vue&type=template&id=118f9b76&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FieldTypes/PinPoint/PinAnnotatedItem.vue?vue&type=template&id=118f9b76&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PinAnnotatedItem_vue_vue_type_template_id_118f9b76_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PinAnnotatedItem_vue_vue_type_template_id_118f9b76___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PinAnnotatedItem_vue_vue_type_template_id_118f9b76_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

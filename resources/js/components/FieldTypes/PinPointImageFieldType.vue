@@ -236,6 +236,7 @@ export default {
           heading: "",
           fields: [],
           entries: null,
+          icons: null,
         },
       });
       this.fieldValue.annotations = this.annotations;

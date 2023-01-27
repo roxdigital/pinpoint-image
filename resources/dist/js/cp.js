@@ -7199,6 +7199,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mixins: [Fieldtype],
   props: {
@@ -7213,8 +7215,7 @@ __webpack_require__.r(__webpack_exports__);
             fields: [],
             entries: [],
             icons: [],
-            color: "",
-            icon: ""
+            color: ""
           }
         };
       }
@@ -7241,7 +7242,6 @@ __webpack_require__.r(__webpack_exports__);
       entries: this.entries,
       icons: this.icons,
       selected: null,
-      icon: "",
       colorConfig: {
         lock_opacity: true,
         swatches: ["#f44336", "#e91e63", "#9c27b0"],
@@ -7255,17 +7255,6 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     hasFields: function hasFields() {
       return this.item.data.fields !== undefined && this.item.data.fields.length > 0;
-    },
-    iconOptions: function iconOptions() {
-      return this.icons.map(function (icon) {
-        return {
-          label: icon.title,
-          value: icon.id
-        };
-      });
-    },
-    iconOptions2: function iconOptions2() {
-      return this.icons;
     }
   },
   methods: {
@@ -7304,8 +7293,36 @@ __webpack_require__.r(__webpack_exports__);
         };
       });
     },
+    createIconsObject: function createIconsObject() {
+      return this.icons.map(function (icon) {
+        return {
+          "label": icon.title,
+          "value": icon.fa_icon
+        };
+      });
+    },
+    isSelected: function isSelected(value) {
+      var _this$item$data$icons;
+
+      return (_this$item$data$icons = this.item.data.icons) === null || _this$item$data$icons === void 0 ? void 0 : _this$item$data$icons.includes(value);
+    },
+    toggleIcon: function toggleIcon(event) {
+      var _this$item$data$icons2;
+
+      var value = event.target.value;
+
+      if ((_this$item$data$icons2 = this.item.data.icons) !== null && _this$item$data$icons2 !== void 0 && _this$item$data$icons2.includes(value)) {
+        var _this$item$data$icons3, _this$item$data$icons4;
+
+        (_this$item$data$icons3 = this.item.data.icons) === null || _this$item$data$icons3 === void 0 ? void 0 : _this$item$data$icons3.splice((_this$item$data$icons4 = this.item.data.icons) === null || _this$item$data$icons4 === void 0 ? void 0 : _this$item$data$icons4.indexOf(value), 1);
+      } else {
+        var _this$item$data$icons5;
+
+        (_this$item$data$icons5 = this.item.data.icons) === null || _this$item$data$icons5 === void 0 ? void 0 : _this$item$data$icons5.push(value);
+      }
+    },
     onSelectionChange: function onSelectionChange() {
-      console.log(this.item.data.entries);
+      console.log(this.item.data.icons);
     }
   }
 });
@@ -7551,7 +7568,8 @@ __webpack_require__.r(__webpack_exports__);
         data: {
           heading: "",
           fields: [],
-          entries: null
+          entries: null,
+          icons: null
         }
       });
       this.fieldValue.annotations = this.annotations;
@@ -8854,26 +8872,23 @@ var render = function () {
                         ],
                         staticClass: "py-1",
                         on: {
-                          change: [
-                            function ($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function (o) {
-                                  return o.selected
-                                })
-                                .map(function (o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.$set(
-                                _vm.item.data,
-                                "entries",
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              )
-                            },
-                            _vm.onSelectionChange,
-                          ],
+                          change: function ($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function (o) {
+                                return o.selected
+                              })
+                              .map(function (o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.item.data,
+                              "entries",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          },
                         },
                       },
                       _vm._l(_vm.createEntriesObject(), function (option) {
@@ -8893,38 +8908,83 @@ var render = function () {
                     ),
                   ]),
                   _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "flex flex-col gap-2 mt-2" },
-                    [
-                      _c("p", { staticClass: "text-base font-bold" }, [
-                        _vm._v("Icon"),
-                      ]),
-                      _vm._v(" "),
-                      _c("select-input", {
-                        attrs: { options: _vm.iconOptions },
-                        model: {
-                          value: _vm.item.data.icon,
-                          callback: function ($$v) {
-                            _vm.$set(_vm.item.data, "icon", $$v)
+                  _c("div", { staticClass: "flex flex-col gap-2 mt-2" }, [
+                    _c("h3", { staticClass: "text-base font-bold" }, [
+                      _vm._v("Icons"),
+                    ]),
+                    _vm._v(" "),
+                    _vm.item.data.icons !== undefined
+                      ? _c(
+                          "button",
+                          {
+                            on: {
+                              click: function ($event) {
+                                _vm.item.data.icons = undefined
+                              },
+                            },
                           },
-                          expression: "item.data.icon",
-                        },
-                      }),
-                      _vm._v(" "),
-                      _c("relationship-input", {
-                        attrs: { config: { items: _vm.iconOptions2 } },
-                        model: {
-                          value: _vm.item.data.icon,
-                          callback: function ($$v) {
-                            _vm.$set(_vm.item.data, "icon", $$v)
+                          [_vm._v("Clear icons")]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.item.data.icons,
+                            expression: "item.data.icons",
                           },
-                          expression: "item.data.icon",
+                        ],
+                        staticClass: "py-1",
+                        attrs: { multiple: "" },
+                        on: {
+                          input: _vm.toggleIcon,
+                          change: [
+                            function ($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function (o) {
+                                  return o.selected
+                                })
+                                .map(function (o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.item.data,
+                                "icons",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            },
+                            _vm.onSelectionChange,
+                          ],
                         },
+                      },
+                      _vm._l(_vm.createIconsObject(), function (option) {
+                        return _c(
+                          "option",
+                          {
+                            domProps: {
+                              value: option.value,
+                              selected: _vm.isSelected(option.value),
+                            },
+                          },
+                          [
+                            _vm._v(
+                              "\n              " +
+                                _vm._s(option.label) +
+                                "\n            "
+                            ),
+                          ]
+                        )
                       }),
-                    ],
-                    1
-                  ),
+                      0
+                    ),
+                  ]),
                   _vm._v(" "),
                   _c(
                     "div",
@@ -9798,7 +9858,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/patrickdokter/repositories/slimmeinfra.nl/addons/roxdigital/pinpoint-image/resources/js/cp.js */"./resources/js/cp.js");
+module.exports = __webpack_require__(/*! /Users/nicolascanala/sites/ROX/heijmans-infra-wereld/addons/roxdigital/pinpoint-image/resources/js/cp.js */"./resources/js/cp.js");
 
 
 /***/ })

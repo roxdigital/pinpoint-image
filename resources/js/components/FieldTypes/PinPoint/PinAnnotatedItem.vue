@@ -35,24 +35,26 @@
           <div class="flex flex-col gap-2">
             <h3 class="text-base font-bold">Page entry</h3>
 
-            <select v-model="item.data.entries" @change="onSelectionChange" class="py-1">
+            <!-- Entries -->
+            <select v-model="item.data.entries" class="py-1">
               <option v-for="option in createEntriesObject()" v-bind:value="option.value">
                 {{ option.label }}
               </option>
             </select>
           </div>
 
-          <!-- FA Icons -->
+          <!-- Icons-->
           <div class="flex flex-col gap-2 mt-2">
-            <p class="text-base font-bold">Icon</p>
-            <select-input
-              :options="iconOptions"
-              v-model="item.data.icon"
-            ></select-input>
+            <h3 class="text-base font-bold">Icons</h3>
 
-            <relationship-input v-model="item.data.icon" :config="{items: iconOptions2}"></relationship-input>
+            <button v-if="item.data.icons !== undefined" @click="item.data.icons = undefined">Clear icons</button>
+            
+            <select multiple v-model="item.data.icons" @input="toggleIcon" @change="onSelectionChange" class="py-1">
+              <option v-for="option in createIconsObject()" v-bind:value="option.value" :selected="isSelected(option.value)">
+                {{ option.label }}
+              </option>
+            </select>
           </div>
-
 
           <!-- Color picker -->
           <div class="flex flex-col gap-2 mt-2">
@@ -82,6 +84,7 @@
 
 export default {
   mixins: [Fieldtype],
+
   props: {
     item: {
       type: Object,
@@ -94,7 +97,6 @@ export default {
           entries: [],
           icons: [],
           color: "",
-          icon: ""
         }
       })
     },
@@ -120,7 +122,6 @@ export default {
       entries: this.entries,
       icons: this.icons,
       selected: null,
-      icon: "",
       colorConfig: {
         lock_opacity: true,
         swatches: ["#f44336", "#e91e63", "#9c27b0"],
@@ -135,17 +136,6 @@ export default {
     hasFields() {
       return (this.item.data.fields !== undefined && this.item.data.fields.length > 0);
     },
-    iconOptions() {
-      return this.icons.map(icon => {
-        return {
-          label: icon.title,
-          value: icon.id
-        };
-      });
-    },
-    iconOptions2() {
-      return this.icons;
-    }
   },
   methods: {
     select(fieldType) {
@@ -180,8 +170,27 @@ export default {
         };
       });
     },
+    createIconsObject() {
+      return this.icons.map((icon) => {
+        return {
+          "label": icon.title,
+          "value": icon.fa_icon
+        };
+      });
+    },
+    isSelected(value) {
+      return this.item.data.icons?.includes(value);
+    },
+    toggleIcon(event) {
+      const value = event.target.value;
+      if (this.item.data.icons?.includes(value)) {
+        this.item.data.icons?.splice(this.item.data.icons?.indexOf(value), 1);
+      } else {
+        this.item.data.icons?.push(value);
+      }
+    },
     onSelectionChange() {
-      console.log(this.item.data.entries);
+      console.log(this.item.data.icons);
     }
   }
 };

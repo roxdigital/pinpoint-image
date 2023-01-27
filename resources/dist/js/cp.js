@@ -7441,6 +7441,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -7479,7 +7483,6 @@ __webpack_require__.r(__webpack_exports__);
         annotations: []
       },
       hasImage: false,
-      containerWidth: null,
       image: [],
       annotations: [],
       loading: false,
@@ -7512,12 +7515,6 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     logToConsole: function logToConsole(message) {
       console.log(message);
-    },
-    reorderItems: function reorderItems() {
-      this.drag = false;
-    },
-    updateAnnotation: function updateAnnotation(updatedData) {
-      this.$set(this.annotations, updatedData.index, updatedData.data);
     },
     clearImage: function clearImage() {
       if (!confirm("Are you sure?")) {
@@ -7620,9 +7617,6 @@ __webpack_require__.r(__webpack_exports__);
     roundUp: function roundUp(num, precision) {
       precision = Math.pow(10, precision);
       return num;
-    },
-    isNull: function isNull(value) {
-      return value === null;
     },
     cleanObject: function cleanObject(obj) {
       return JSON.parse(JSON.stringify(obj));

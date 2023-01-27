@@ -37,7 +37,7 @@
           handle-class="sortable-handle"
           @dragstart="$emit('focus')"
           @dragend="updateOrder"
-          style="display: flex; flex-wrap: wrap; order: 2;"
+          style="display: flex; flex-wrap: wrap; order: 2"
         >
           <div ref="list">
             <div
@@ -53,7 +53,7 @@
                 :item-index="index"
                 :entries="meta.entries"
                 :icons="meta.icons"
-                style="padding: 8px 14px !important;"
+                style="padding: 8px 14px !important"
               ></pin-annotated-item>
             </div>
           </div>
@@ -68,8 +68,12 @@
           <div
             v-if="annotations.length"
             v-for="(item, index) in annotations"
-            :style="{ top: item.y + '%', left: item.x + '%', backgroundColor: item.data.color ? item.data.color : '#303750' }"
-            style="transform: translate(-50%, -100%) rotate(45deg);"
+            :style="{
+              top: item.y + '%',
+              left: item.x + '%',
+              backgroundColor: item.data.color ? item.data.color : '#303750',
+            }"
+            style="transform: translate(-50%, -100%) rotate(45deg)"
             class="pinpoint-annotate"
             draggable="true"
             @dragend="dragEnd($event, item, index)"
@@ -125,7 +129,6 @@ export default {
       drag: false,
       fieldValue: { image: {}, annotations: [] },
       hasImage: false,
-      containerWidth: null,
       image: [],
       annotations: [],
       loading: false,
@@ -164,12 +167,6 @@ export default {
   methods: {
     logToConsole(message) {
       console.log(message);
-    },
-    reorderItems() {
-      this.drag = false;
-    },
-    updateAnnotation(updatedData) {
-      this.$set(this.annotations, updatedData.index, updatedData.data);
     },
     clearImage() {
       if (!confirm("Are you sure?")) {
@@ -279,10 +276,6 @@ export default {
     roundUp(num, precision) {
       precision = Math.pow(10, precision);
       return num;
-    },
-
-    isNull(value) {
-      return value === null;
     },
 
     cleanObject(obj) {

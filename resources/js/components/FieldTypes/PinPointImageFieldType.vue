@@ -53,6 +53,7 @@
                 :item-index="index"
                 :entries="meta.entries"
                 :icons="meta.icons"
+                :category="meta.map_categories"
                 style="padding: 8px 14px !important"
               ></pin-annotated-item>
             </div>
@@ -164,6 +165,7 @@ export default {
       return this.annotations.length > 0;
     },
   },
+
   methods: {
     logToConsole(message) {
       console.log(message);
@@ -199,7 +201,6 @@ export default {
       }
       this.getImageAsset(value[0]);
     },
-
     getImageAsset(value) {
       this.loading = true;
       this.$axios
@@ -218,12 +219,10 @@ export default {
           this.loading = false;
         });
     },
-
     cpUrl(url) {
       url = Statamic.$config.get("cpUrl") + "/" + url;
       return url.replace(/([^:])(\/\/+)/g, "$1/");
     },
-
     getClickedPosition(e) {
       let xy = this.getXyPosition(e);
       this.annotations.push({
@@ -234,11 +233,11 @@ export default {
           fields: [],
           entries: null,
           icons: null,
+          category: null,
         },
       });
       this.fieldValue.annotations = this.annotations;
     },
-
     getXyPosition(e) {
       const position = e.currentTarget.getBoundingClientRect();
       const xPosition = e.clientX - position.x;
@@ -256,28 +255,23 @@ export default {
         y,
       };
     },
-
     remove(index) {
       this.annotations.splice(index, 1);
       this.fieldValue.annotations = this.annotations;
     },
-
     dragEnd($event, item, index) {
       let xy = this.getXyPosition($event);
 
       this.annotations[index].x = item.x + xy.x;
       this.annotations[index].y = item.y + xy.y;
     },
-
     updateOrder: _.debounce(function () {
       this.fieldValue.annotations = this.annotations;
     }, 500),
-
     roundUp(num, precision) {
       precision = Math.pow(10, precision);
       return num;
     },
-
     cleanObject(obj) {
       return JSON.parse(JSON.stringify(obj));
     },

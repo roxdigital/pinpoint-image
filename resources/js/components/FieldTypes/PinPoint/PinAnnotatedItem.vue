@@ -55,8 +55,30 @@
             class="input-text mb-2"
           />
 
-          <!-- Entries -->
+          <!-- Category -->
           <div class="flex flex-col gap-2">
+            <h3 class="text-base font-bold">Category</h3>
+
+            <button
+              v-if="item.data.category !== undefined"
+              @click="item.data.category = []"
+              class="btn"
+            >
+              Clear category
+            </button>
+
+            <select v-model="item.data.category" class="py-1">
+              <option
+                v-for="option in createCategoryObject()"
+                v-bind:value="option.value"
+              >
+                {{ option.label }}
+              </option>
+            </select>
+          </div>
+
+          <!-- Entries -->
+          <div class="flex flex-col gap-2 mt-2">
             <h3 class="text-base font-bold">Page entry</h3>
 
             <!-- Find a way to clear entry -->
@@ -137,10 +159,6 @@
 export default {
   mixins: [Fieldtype],
 
-  mounted() {
-    console.log(this.item.data.entries);
-  },
-
   props: {
     item: {
       type: Object,
@@ -152,6 +170,7 @@ export default {
           entries: [],
           icons: [],
           color: "",
+          category: [],
         },
       }),
     },
@@ -167,6 +186,10 @@ export default {
       type: Array,
       default: [],
     },
+    category: {
+      type: Array,
+      default: [],
+    },
   },
   data() {
     return {
@@ -174,6 +197,7 @@ export default {
       heading: this.item.data.heading,
       entries: this.entries,
       icons: this.icons,
+      category: this.category,
       colorConfig: {
         lock_opacity: true,
         swatches: ["#f44336", "#e91e63", "#9c27b0"],
@@ -207,6 +231,18 @@ export default {
         return {
           label: icon.title,
           value: icon.fa_icon,
+        };
+      });
+    },
+    createCategoryObject() {
+      return this.category.map((category) => {
+        console.log("sing", category.title);
+        return {
+          label: category.title,
+          value: {
+            title: category.title,
+            color: category.color_field,
+          },
         };
       });
     },

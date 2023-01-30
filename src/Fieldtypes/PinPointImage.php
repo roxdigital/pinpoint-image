@@ -36,7 +36,6 @@ class PinPointImage extends Fieldtype
         'annotations' => [],
         'entries' => [],
         'color' => '',
-        'map_category' => '',
         'map_categories' => [],
         'icons' => []
     ];

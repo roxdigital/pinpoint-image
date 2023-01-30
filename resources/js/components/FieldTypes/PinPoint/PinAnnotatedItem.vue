@@ -59,6 +59,15 @@
           <div class="flex flex-col gap-2">
             <h3 class="text-base font-bold">Page entry</h3>
 
+            <!-- Find a way to clear entry -->
+            <button
+              v-if="item.data.entries !== undefined"
+              @click="item.data.entries = []"
+              class="btn"
+            >
+              Clear entry
+            </button>
+
             <select v-model="item.data.entries" class="py-1">
               <option
                 v-for="option in createEntriesObject()"

@@ -7245,6 +7245,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mixins: [Fieldtype],
   mounted: function mounted() {
@@ -8918,6 +8927,21 @@ var render = function () {
                     _c("h3", { staticClass: "text-base font-bold" }, [
                       _vm._v("Page entry"),
                     ]),
+                    _vm._v(" "),
+                    _vm.item.data.entries !== undefined
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn",
+                            on: {
+                              click: function ($event) {
+                                _vm.item.data.entries = []
+                              },
+                            },
+                          },
+                          [_vm._v("\n            Clear entry\n          ")]
+                        )
+                      : _vm._e(),
                     _vm._v(" "),
                     _c(
                       "select",

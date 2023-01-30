@@ -6,17 +6,12 @@ use Statamic\Facades\GraphQL;
 use Statamic\Providers\AddonServiceProvider;
 use Roxdigital\PinpointImage\Fieldtypes\PinPointImage;
 use Roxdigital\PinpointImage\GraphQL\PinPointImageFieldType;
-use Roxdigital\PinpointImage\Tags\PinpointImageTag;
 use Statamic\Statamic;
 
 class ServiceProvider extends AddonServiceProvider
 {
     protected $scripts = [
         __DIR__.'/../resources/dist/js/cp.js',
-    ];
-
-    protected $tags = [
-        PinpointImageTag::class,
     ];
 
     protected $fieldtypes = [

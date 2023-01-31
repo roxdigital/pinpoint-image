@@ -7330,6 +7330,7 @@ __webpack_require__.r(__webpack_exports__);
       entries: this.entries,
       icons: this.icons,
       category: this.category,
+      iconEnum: this.createIconEnum(),
       colorConfig: {
         lock_opacity: true,
         swatches: ["#4F7EBD", "#FEB900", "#65BA3D"],
@@ -7342,6 +7343,24 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {},
   methods: {
+    modal: function modal() {
+      var _this = this;
+
+      this.modalOpen = !this.modalOpen;
+      this.item.data.icons = this.item.data.icons.map(function (item) {
+        return _this.iconEnum[item];
+      });
+    },
+    createIconEnum: function createIconEnum() {
+      var icons = this.icons.reduce(function (accumulator, icon) {
+        accumulator[icon.fa_icon] = {
+          title: icon.title,
+          "class": icon.fa_icon
+        };
+        return accumulator;
+      }, {});
+      return icons;
+    },
     edit: function edit() {
       this.modalOpen = true;
     },
@@ -7355,14 +7374,6 @@ __webpack_require__.r(__webpack_exports__);
         return {
           label: entry.title,
           value: entry.url
-        };
-      });
-    },
-    createIconsObject: function createIconsObject() {
-      return this.icons.map(function (icon) {
-        return {
-          label: icon.title,
-          value: icon.fa_icon
         };
       });
     },
@@ -8929,11 +8940,7 @@ var render = function () {
                   staticClass: "btn-close absolute top-0 right-0 mt-2 mr-2",
                   attrs: { "aria-label": _vm.__("Close") },
                   domProps: { innerHTML: _vm._s("&times") },
-                  on: {
-                    click: function ($event) {
-                      _vm.modalOpen = false
-                    },
-                  },
+                  on: { click: _vm.modal },
                 }),
                 _vm._v(" "),
                 _c("div", { staticClass: "content mt-0 mb-2" }, [
@@ -9197,24 +9204,27 @@ var render = function () {
                               },
                             },
                           },
-                          _vm._l(_vm.createIconsObject(), function (option) {
-                            return _c(
-                              "option",
-                              {
-                                domProps: {
-                                  value: option.value,
-                                  selected: _vm.isSelected(option.value),
+                          _vm._l(
+                            Object.values(_vm.createIconEnum()),
+                            function (option) {
+                              return _c(
+                                "option",
+                                {
+                                  domProps: {
+                                    value: option.class,
+                                    selected: _vm.isSelected(option.class),
+                                  },
                                 },
-                              },
-                              [
-                                _vm._v(
-                                  "\n                " +
-                                    _vm._s(option.label) +
-                                    "\n              "
-                                ),
-                              ]
-                            )
-                          }),
+                                [
+                                  _vm._v(
+                                    "\n                " +
+                                      _vm._s(option.title) +
+                                      "\n              "
+                                  ),
+                                ]
+                              )
+                            }
+                          ),
                           0
                         ),
                       ]),
@@ -9266,11 +9276,7 @@ var render = function () {
                       {
                         staticClass:
                           "btn-primary w-auto ml-auto flex justify-center items-center",
-                        on: {
-                          click: function ($event) {
-                            _vm.modalOpen = false
-                          },
-                        },
+                        on: { click: _vm.modal },
                       },
                       [
                         _vm._v(

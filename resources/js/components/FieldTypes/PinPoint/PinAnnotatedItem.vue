@@ -37,7 +37,7 @@
         <button
           class="btn-close absolute top-0 right-0 mt-2 mr-2"
           :aria-label="__('Close')"
-          @click="modalOpen = false"
+          @click="modal"
           v-html="'&times'"
         />
 
@@ -125,11 +125,11 @@
                 class="py-1"
               >
                 <option
-                  v-for="option in createIconsObject()"
-                  v-bind:value="option.value"
-                  :selected="isSelected(option.value)"
+                  v-for="option in Object.values(createIconEnum())"
+                  v-bind:value="option.class"
+                  :selected="isSelected(option.class)"
                 >
-                  {{ option.label }}
+                  {{ option.title }}
                 </option>
               </select>
             </div>
@@ -156,7 +156,7 @@
           <div class="flex flex-row justify-between">
             <button
               class="btn-primary w-auto ml-auto flex justify-center items-center"
-              @click="modalOpen = false"
+              @click="modal"
             >
               {{ __("Close") }}
             </button>
@@ -209,6 +209,7 @@ export default {
       entries: this.entries,
       icons: this.icons,
       category: this.category,
+      iconEnum: this.createIconEnum(),
       colorConfig: {
         lock_opacity: true,
         swatches: ["#4F7EBD", "#FEB900", "#65BA3D"],
@@ -221,6 +222,27 @@ export default {
   },
   computed: {},
   methods: {
+    modal() {
+      this.modalOpen = !this.modalOpen;
+
+      this.item.data.icons = this.item.data.icons.map((item) => {
+        return this.iconEnum[item];
+      });
+    },
+
+    createIconEnum() {
+      const icons = this.icons.reduce((accumulator, icon) => {
+        accumulator[icon.fa_icon] = {
+          title: icon.title,
+          class: icon.fa_icon,
+        };
+
+        return accumulator;
+      }, {});
+
+      return icons;
+    },
+
     edit() {
       this.modalOpen = true;
     },
@@ -234,14 +256,6 @@ export default {
         return {
           label: entry.title,
           value: entry.url,
-        };
-      });
-    },
-    createIconsObject() {
-      return this.icons.map((icon) => {
-        return {
-          label: icon.title,
-          value: icon.fa_icon,
         };
       });
     },
@@ -261,6 +275,7 @@ export default {
     },
     toggleIcon(event) {
       const value = event.target.value;
+
       if (this.item.data.icons?.includes(value)) {
         this.item.data.icons?.splice(this.item.data.icons?.indexOf(value), 1);
       } else {

@@ -55,88 +55,99 @@
             class="input-text mb-2"
           />
 
-          <!-- Category -->
-          <div class="flex flex-col gap-2">
-            <h3 class="text-base font-bold">Category</h3>
+          <!-- Layout -->
+          <div class="grid w-full grid-cols-2 gap-x-4 mt-2">
+            <!-- Category -->
+            <div class="flex flex-col gap-2">
+              <h3 class="text-base font-bold">Category</h3>
 
-            <button
-              v-if="item.data.category !== undefined"
-              @click="item.data.category = []"
-              class="btn"
-            >
-              Clear category
-            </button>
-
-            <select v-model="item.data.category" class="py-1">
-              <option
-                v-for="option in createCategoryObject()"
-                v-bind:value="option.value"
+              <button
+                v-if="item.data.category !== undefined"
+                @click="item.data.category = []"
+                class="btn"
               >
-                {{ option.label }}
-              </option>
-            </select>
+                Clear category
+              </button>
+
+              <select v-model="item.data.category" class="py-1">
+                <option
+                  v-for="option in createCategoryObject()"
+                  v-bind:value="option.value"
+                >
+                  {{ option.label }}
+                </option>
+              </select>
+            </div>
+
+            <!-- Entries -->
+            <div class="flex flex-col gap-2">
+              <h3 class="text-base font-bold">Page entry</h3>
+
+              <button
+                v-if="item.data.entries !== undefined"
+                @click="item.data.entries = []"
+                class="btn"
+              >
+                Clear entry
+              </button>
+
+              <select v-model="item.data.entries" class="py-1">
+                <option
+                  v-for="option in createEntriesObject()"
+                  v-bind:value="option.value"
+                >
+                  {{ option.label }}
+                </option>
+              </select>
+            </div>
           </div>
 
-          <!-- Entries -->
-          <div class="flex flex-col gap-2 mt-2">
-            <h3 class="text-base font-bold">Page entry</h3>
+          <div class="grid w-full grid-cols-2 gap-x-4 mt-2">
+            <!-- Icons-->
+            <div class="flex flex-col gap-2 mt-2">
+              <div class="flex items-center gap-x-1">
+                <h3 class="text-base font-bold">Icons</h3>
+                <span class="text-xs text-gray-50 italic">(Max. 3 icons).</span>
+              </div>
 
-            <!-- Find a way to clear entry -->
-            <button
-              v-if="item.data.entries !== undefined"
-              @click="item.data.entries = []"
-              class="btn"
-            >
-              Clear entry
-            </button>
-
-            <select v-model="item.data.entries" class="py-1">
-              <option
-                v-for="option in createEntriesObject()"
-                v-bind:value="option.value"
+              <button
+                v-if="item.data.icons !== undefined"
+                @click="item.data.icons = undefined"
+                class="btn"
               >
-                {{ option.label }}
-              </option>
-            </select>
-          </div>
+                Clear icons
+              </button>
 
-          <!-- Icons-->
-          <div class="flex flex-col gap-2 mt-2">
-            <h3 class="text-base font-bold">Icons</h3>
-
-            <button
-              v-if="item.data.icons !== undefined"
-              @click="item.data.icons = undefined"
-              class="btn"
-            >
-              Clear icons
-            </button>
-
-            <select
-              multiple
-              v-model="item.data.icons"
-              @input="toggleIcon"
-              class="py-1"
-            >
-              <option
-                v-for="option in createIconsObject()"
-                v-bind:value="option.value"
-                :selected="isSelected(option.value)"
+              <select
+                multiple
+                v-model="item.data.icons"
+                @input="toggleIcon"
+                class="py-1"
               >
-                {{ option.label }}
-              </option>
-            </select>
-          </div>
+                <option
+                  v-for="option in createIconsObject()"
+                  v-bind:value="option.value"
+                  :selected="isSelected(option.value)"
+                >
+                  {{ option.label }}
+                </option>
+              </select>
+            </div>
 
-          <!-- Color picker -->
-          <div class="flex flex-col gap-2 mt-2">
-            <p class="text-base font-bold">Marker color</p>
+            <!-- Color picker -->
+            <div class="flex flex-col gap-2 mt-2">
+              <!-- <p class="text-base font-bold">Color</p> -->
+              <div class="flex items-center gap-x-1">
+                <h3 class="text-base font-bold">Color</h3>
+                <span class="text-xs text-gray-50 italic">(HEX or RGBA).</span>
+              </div>
 
-            <color-fieldtype
-              v-model="item.data.color"
-              :isReadOnly="false"
-              :config="colorConfig"
-            ></color-fieldtype>
+              <color-fieldtype
+                v-model="item.data.color"
+                :isReadOnly="false"
+                :config="colorConfig"
+              ></color-fieldtype>
+            </div>
           </div>
         </div>
 

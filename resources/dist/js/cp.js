@@ -7276,6 +7276,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mixins: [Fieldtype],
   props: {
@@ -8962,240 +8973,291 @@ var render = function () {
                     },
                   }),
                   _vm._v(" "),
-                  _c("div", { staticClass: "flex flex-col gap-2" }, [
-                    _c("h3", { staticClass: "text-base font-bold" }, [
-                      _vm._v("Category"),
-                    ]),
-                    _vm._v(" "),
-                    _vm.item.data.category !== undefined
-                      ? _c(
-                          "button",
+                  _c(
+                    "div",
+                    { staticClass: "grid w-full grid-cols-2 gap-x-4 mt-2" },
+                    [
+                      _c("div", { staticClass: "flex flex-col gap-2" }, [
+                        _c("h3", { staticClass: "text-base font-bold" }, [
+                          _vm._v("Category"),
+                        ]),
+                        _vm._v(" "),
+                        _vm.item.data.category !== undefined
+                          ? _c(
+                              "button",
+                              {
+                                staticClass: "btn",
+                                on: {
+                                  click: function ($event) {
+                                    _vm.item.data.category = []
+                                  },
+                                },
+                              },
+                              [
+                                _vm._v(
+                                  "\n              Clear category\n            "
+                                ),
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c(
+                          "select",
                           {
-                            staticClass: "btn",
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.item.data.category,
+                                expression: "item.data.category",
+                              },
+                            ],
+                            staticClass: "py-1",
                             on: {
-                              click: function ($event) {
-                                _vm.item.data.category = []
+                              change: function ($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function (o) {
+                                    return o.selected
+                                  })
+                                  .map(function (o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.item.data,
+                                  "category",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
                               },
                             },
                           },
-                          [_vm._v("\n            Clear category\n          ")]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.item.data.category,
-                            expression: "item.data.category",
-                          },
-                        ],
-                        staticClass: "py-1",
-                        on: {
-                          change: function ($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function (o) {
-                                return o.selected
-                              })
-                              .map(function (o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.$set(
-                              _vm.item.data,
-                              "category",
-                              $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
+                          _vm._l(_vm.createCategoryObject(), function (option) {
+                            return _c(
+                              "option",
+                              { domProps: { value: option.value } },
+                              [
+                                _vm._v(
+                                  "\n                " +
+                                    _vm._s(option.label) +
+                                    "\n              "
+                                ),
+                              ]
                             )
-                          },
-                        },
-                      },
-                      _vm._l(_vm.createCategoryObject(), function (option) {
-                        return _c(
-                          "option",
-                          { domProps: { value: option.value } },
-                          [
-                            _vm._v(
-                              "\n              " +
-                                _vm._s(option.label) +
-                                "\n            "
-                            ),
-                          ]
-                        )
-                      }),
-                      0
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "flex flex-col gap-2 mt-2" }, [
-                    _c("h3", { staticClass: "text-base font-bold" }, [
-                      _vm._v("Page entry"),
-                    ]),
-                    _vm._v(" "),
-                    _vm.item.data.entries !== undefined
-                      ? _c(
-                          "button",
+                          }),
+                          0
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "flex flex-col gap-2" }, [
+                        _c("h3", { staticClass: "text-base font-bold" }, [
+                          _vm._v("Page entry"),
+                        ]),
+                        _vm._v(" "),
+                        _vm.item.data.entries !== undefined
+                          ? _c(
+                              "button",
+                              {
+                                staticClass: "btn",
+                                on: {
+                                  click: function ($event) {
+                                    _vm.item.data.entries = []
+                                  },
+                                },
+                              },
+                              [
+                                _vm._v(
+                                  "\n              Clear entry\n            "
+                                ),
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c(
+                          "select",
                           {
-                            staticClass: "btn",
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.item.data.entries,
+                                expression: "item.data.entries",
+                              },
+                            ],
+                            staticClass: "py-1",
                             on: {
-                              click: function ($event) {
-                                _vm.item.data.entries = []
+                              change: function ($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function (o) {
+                                    return o.selected
+                                  })
+                                  .map(function (o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.item.data,
+                                  "entries",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
                               },
                             },
                           },
-                          [_vm._v("\n            Clear entry\n          ")]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.item.data.entries,
-                            expression: "item.data.entries",
-                          },
-                        ],
-                        staticClass: "py-1",
-                        on: {
-                          change: function ($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function (o) {
-                                return o.selected
-                              })
-                              .map(function (o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.$set(
-                              _vm.item.data,
-                              "entries",
-                              $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
+                          _vm._l(_vm.createEntriesObject(), function (option) {
+                            return _c(
+                              "option",
+                              { domProps: { value: option.value } },
+                              [
+                                _vm._v(
+                                  "\n                " +
+                                    _vm._s(option.label) +
+                                    "\n              "
+                                ),
+                              ]
                             )
-                          },
-                        },
-                      },
-                      _vm._l(_vm.createEntriesObject(), function (option) {
-                        return _c(
-                          "option",
-                          { domProps: { value: option.value } },
-                          [
-                            _vm._v(
-                              "\n              " +
-                                _vm._s(option.label) +
-                                "\n            "
-                            ),
-                          ]
-                        )
-                      }),
-                      0
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "flex flex-col gap-2 mt-2" }, [
-                    _c("h3", { staticClass: "text-base font-bold" }, [
-                      _vm._v("Icons"),
-                    ]),
-                    _vm._v(" "),
-                    _vm.item.data.icons !== undefined
-                      ? _c(
-                          "button",
-                          {
-                            staticClass: "btn",
-                            on: {
-                              click: function ($event) {
-                                _vm.item.data.icons = undefined
-                              },
-                            },
-                          },
-                          [_vm._v("\n            Clear icons\n          ")]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.item.data.icons,
-                            expression: "item.data.icons",
-                          },
-                        ],
-                        staticClass: "py-1",
-                        attrs: { multiple: "" },
-                        on: {
-                          input: _vm.toggleIcon,
-                          change: function ($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function (o) {
-                                return o.selected
-                              })
-                              .map(function (o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.$set(
-                              _vm.item.data,
-                              "icons",
-                              $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            )
-                          },
-                        },
-                      },
-                      _vm._l(_vm.createIconsObject(), function (option) {
-                        return _c(
-                          "option",
-                          {
-                            domProps: {
-                              value: option.value,
-                              selected: _vm.isSelected(option.value),
-                            },
-                          },
-                          [
-                            _vm._v(
-                              "\n              " +
-                                _vm._s(option.label) +
-                                "\n            "
-                            ),
-                          ]
-                        )
-                      }),
-                      0
-                    ),
-                  ]),
+                          }),
+                          0
+                        ),
+                      ]),
+                    ]
+                  ),
                   _vm._v(" "),
                   _c(
                     "div",
-                    { staticClass: "flex flex-col gap-2 mt-2" },
+                    { staticClass: "grid w-full grid-cols-2 gap-x-4 mt-2" },
                     [
-                      _c("p", { staticClass: "text-base font-bold" }, [
-                        _vm._v("Marker color"),
+                      _c("div", { staticClass: "flex flex-col gap-2 mt-2" }, [
+                        _c(
+                          "div",
+                          { staticClass: "flex items-center gap-x-1" },
+                          [
+                            _c("h3", { staticClass: "text-base font-bold" }, [
+                              _vm._v("Icons"),
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              { staticClass: "text-xs text-gray-50 italic" },
+                              [_vm._v("(Max. 3 icons).")]
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm.item.data.icons !== undefined
+                          ? _c(
+                              "button",
+                              {
+                                staticClass: "btn",
+                                on: {
+                                  click: function ($event) {
+                                    _vm.item.data.icons = undefined
+                                  },
+                                },
+                              },
+                              [
+                                _vm._v(
+                                  "\n              Clear icons\n            "
+                                ),
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.item.data.icons,
+                                expression: "item.data.icons",
+                              },
+                            ],
+                            staticClass: "py-1",
+                            attrs: { multiple: "" },
+                            on: {
+                              input: _vm.toggleIcon,
+                              change: function ($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function (o) {
+                                    return o.selected
+                                  })
+                                  .map(function (o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.item.data,
+                                  "icons",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              },
+                            },
+                          },
+                          _vm._l(_vm.createIconsObject(), function (option) {
+                            return _c(
+                              "option",
+                              {
+                                domProps: {
+                                  value: option.value,
+                                  selected: _vm.isSelected(option.value),
+                                },
+                              },
+                              [
+                                _vm._v(
+                                  "\n                " +
+                                    _vm._s(option.label) +
+                                    "\n              "
+                                ),
+                              ]
+                            )
+                          }),
+                          0
+                        ),
                       ]),
                       _vm._v(" "),
-                      _c("color-fieldtype", {
-                        attrs: { isReadOnly: false, config: _vm.colorConfig },
-                        model: {
-                          value: _vm.item.data.color,
-                          callback: function ($$v) {
-                            _vm.$set(_vm.item.data, "color", $$v)
-                          },
-                          expression: "item.data.color",
-                        },
-                      }),
-                    ],
-                    1
+                      _c(
+                        "div",
+                        { staticClass: "flex flex-col gap-2 mt-2" },
+                        [
+                          _c(
+                            "div",
+                            { staticClass: "flex items-center gap-x-1" },
+                            [
+                              _c("h3", { staticClass: "text-base font-bold" }, [
+                                _vm._v("Color"),
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "span",
+                                { staticClass: "text-xs text-gray-50 italic" },
+                                [_vm._v("(HEX or RGBA).")]
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("color-fieldtype", {
+                            attrs: {
+                              isReadOnly: false,
+                              config: _vm.colorConfig,
+                            },
+                            model: {
+                              value: _vm.item.data.color,
+                              callback: function ($$v) {
+                                _vm.$set(_vm.item.data, "color", $$v)
+                              },
+                              expression: "item.data.color",
+                            },
+                          }),
+                        ],
+                        1
+                      ),
+                    ]
                   ),
                 ]),
                 _vm._v(" "),

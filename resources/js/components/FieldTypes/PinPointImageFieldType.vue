@@ -44,7 +44,6 @@
               v-for="(annotation, index) in annotations"
               :key="index"
               class="flex flex-row sortable-row items-stretch justify-stretch"
-              @click="logToConsole(annotation)"
             >
               <span class="pinpoint-drag-handle sortable-handle"></span>
               <pin-annotated-item

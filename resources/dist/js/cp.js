@@ -7332,10 +7332,10 @@ __webpack_require__.r(__webpack_exports__);
       category: this.category,
       colorConfig: {
         lock_opacity: true,
-        swatches: ["#f44336", "#e91e63", "#9c27b0"],
+        swatches: ["#4F7EBD", "#FEB900", "#65BA3D"],
         theme: "classic",
         default_color_mode: "HEX",
-        "default": "#f44336",
+        "default": "#FEB900",
         color_modes: ["hex", "rgba"]
       }
     };
@@ -7368,7 +7368,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     createCategoryObject: function createCategoryObject() {
       return this.category.map(function (category) {
-        console.log("sing", category.title);
         return {
           label: category.title,
           value: {
@@ -7414,7 +7413,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _PinPoint_PinAnnotatedItem__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PinPoint/PinAnnotatedItem */ "./resources/js/components/FieldTypes/PinPoint/PinAnnotatedItem.vue");
 /* harmony import */ var _sortable_Sortable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../sortable/Sortable */ "./resources/js/sortable/Sortable.js");
-//
 //
 //
 //
@@ -9433,11 +9431,6 @@ var render = function () {
                         key: index,
                         staticClass:
                           "flex flex-row sortable-row items-stretch justify-stretch",
-                        on: {
-                          click: function ($event) {
-                            return _vm.logToConsole(annotation)
-                          },
-                        },
                       },
                       [
                         _c("span", {

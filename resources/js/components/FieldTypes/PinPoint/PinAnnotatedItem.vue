@@ -211,10 +211,10 @@ export default {
       category: this.category,
       colorConfig: {
         lock_opacity: true,
-        swatches: ["#f44336", "#e91e63", "#9c27b0"],
+        swatches: ["#4F7EBD", "#FEB900", "#65BA3D"],
         theme: "classic",
         default_color_mode: "HEX",
-        default: "#f44336",
+        default: "#FEB900",
         color_modes: ["hex", "rgba"],
       },
     };
@@ -247,7 +247,6 @@ export default {
     },
     createCategoryObject() {
       return this.category.map((category) => {
-        console.log("sing", category.title);
         return {
           label: category.title,
           value: {

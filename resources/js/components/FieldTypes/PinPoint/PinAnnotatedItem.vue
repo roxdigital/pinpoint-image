@@ -171,6 +171,10 @@
 export default {
   mixins: [Fieldtype],
 
+  mounted() {
+    console.log("mounted");
+  },
+
   props: {
     item: {
       type: Object,
@@ -226,7 +230,7 @@ export default {
     modal() {
       this.modalOpen = !this.modalOpen;
 
-      this.item.data.icons = this.item.data.icons.map((item) => {
+      this.item.data.icons = this.item.data.icons?.map((item) => {
         return this.iconEnum[item];
       });
     },

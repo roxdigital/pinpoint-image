@@ -171,10 +171,6 @@
 export default {
   mixins: [Fieldtype],
 
-  mounted() {
-    console.log("mounted");
-  },
-
   props: {
     item: {
       type: Object,
@@ -276,7 +272,7 @@ export default {
       });
     },
     isSelected(value) {
-      return this.item.data.icons?.some((icon) => icon.class === value);
+      return this.item.data.icons?.some((icon) => icon?.class === value);
     },
     toggleIcon(event) {
       const iconClass = event.target.value;

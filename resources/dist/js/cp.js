@@ -7287,6 +7287,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mixins: [Fieldtype],
   props: {
@@ -7391,21 +7392,23 @@ __webpack_require__.r(__webpack_exports__);
     isSelected: function isSelected(value) {
       var _this$item$data$icons;
 
-      return (_this$item$data$icons = this.item.data.icons) === null || _this$item$data$icons === void 0 ? void 0 : _this$item$data$icons.includes(value);
+      return (_this$item$data$icons = this.item.data.icons) === null || _this$item$data$icons === void 0 ? void 0 : _this$item$data$icons.some(function (icon) {
+        return icon["class"] === value;
+      });
     },
     toggleIcon: function toggleIcon(event) {
       var _this$item$data$icons2;
 
-      var value = event.target.value;
+      var iconClass = event.target.value;
 
-      if ((_this$item$data$icons2 = this.item.data.icons) !== null && _this$item$data$icons2 !== void 0 && _this$item$data$icons2.includes(value)) {
+      if ((_this$item$data$icons2 = this.item.data.icons) !== null && _this$item$data$icons2 !== void 0 && _this$item$data$icons2.includes(iconClass)) {
         var _this$item$data$icons3, _this$item$data$icons4;
 
-        (_this$item$data$icons3 = this.item.data.icons) === null || _this$item$data$icons3 === void 0 ? void 0 : _this$item$data$icons3.splice((_this$item$data$icons4 = this.item.data.icons) === null || _this$item$data$icons4 === void 0 ? void 0 : _this$item$data$icons4.indexOf(value), 1);
+        (_this$item$data$icons3 = this.item.data.icons) === null || _this$item$data$icons3 === void 0 ? void 0 : _this$item$data$icons3.splice((_this$item$data$icons4 = this.item.data.icons) === null || _this$item$data$icons4 === void 0 ? void 0 : _this$item$data$icons4.indexOf(iconClass), 1);
       } else {
         var _this$item$data$icons5;
 
-        (_this$item$data$icons5 = this.item.data.icons) === null || _this$item$data$icons5 === void 0 ? void 0 : _this$item$data$icons5.push(value);
+        (_this$item$data$icons5 = this.item.data.icons) === null || _this$item$data$icons5 === void 0 ? void 0 : _this$item$data$icons5.push(iconClass);
       }
     }
   }
@@ -9210,6 +9213,9 @@ var render = function () {
                               return _c(
                                 "option",
                                 {
+                                  class: _vm.isSelected(option.class)
+                                    ? "bg-blue-200"
+                                    : "",
                                   domProps: {
                                     value: option.class,
                                     selected: _vm.isSelected(option.class),

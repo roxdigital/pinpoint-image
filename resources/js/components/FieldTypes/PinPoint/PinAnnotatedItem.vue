@@ -128,6 +128,7 @@
                   v-for="option in Object.values(createIconEnum())"
                   v-bind:value="option.class"
                   :selected="isSelected(option.class)"
+                  :class="isSelected(option.class) ? 'bg-blue-200' : ''"
                 >
                   {{ option.title }}
                 </option>
@@ -271,15 +272,18 @@ export default {
       });
     },
     isSelected(value) {
-      return this.item.data.icons?.includes(value);
+      return this.item.data.icons?.some((icon) => icon.class === value);
     },
     toggleIcon(event) {
-      const value = event.target.value;
+      const iconClass = event.target.value;
 
-      if (this.item.data.icons?.includes(value)) {
-        this.item.data.icons?.splice(this.item.data.icons?.indexOf(value), 1);
+      if (this.item.data.icons?.includes(iconClass)) {
+        this.item.data.icons?.splice(
+          this.item.data.icons?.indexOf(iconClass),
+          1
+        );
       } else {
-        this.item.data.icons?.push(value);
+        this.item.data.icons?.push(iconClass);
       }
     },
   },

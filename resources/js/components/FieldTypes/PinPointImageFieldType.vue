@@ -231,7 +231,7 @@ export default {
           heading: "",
           fields: [],
           entries: null,
-          icons: null,
+          selectedIcons: [],
           category: null,
         },
       });

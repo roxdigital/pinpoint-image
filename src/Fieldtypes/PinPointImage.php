@@ -124,7 +124,11 @@ class PinPointImage extends Fieldtype
     {
         $entries = Entry::whereCollection('pages');
         $mapCategories = Term::whereTaxonomy('map_category');
-        $icons = Term::whereTaxonomy('icons');
+        $icons = Term::whereTaxonomy('icons')->mapWithKeys(function ($icon) {
+            return [
+                $icon['fa_icon'] => $icon['title'],
+            ];
+        });
 
         return [
             'default' => $this->defaultValue(),

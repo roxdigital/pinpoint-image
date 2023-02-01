@@ -7286,8 +7286,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mixins: [Fieldtype],
   props: {
@@ -7300,7 +7298,7 @@ __webpack_require__.r(__webpack_exports__);
           data: {
             heading: "",
             entries: [],
-            icons: [],
+            selectedIcons: [],
             color: "",
             category: []
           }
@@ -7329,9 +7327,7 @@ __webpack_require__.r(__webpack_exports__);
       modalOpen: false,
       heading: this.item.data.heading,
       entries: this.entries,
-      icons: this.icons,
       category: this.category,
-      iconEnum: this.createIconEnum(),
       colorConfig: {
         lock_opacity: true,
         swatches: ["#4F7EBD", "#FEB900", "#65BA3D"],
@@ -7345,23 +7341,7 @@ __webpack_require__.r(__webpack_exports__);
   computed: {},
   methods: {
     modal: function modal() {
-      var _this$item$data$icons,
-          _this = this;
-
       this.modalOpen = !this.modalOpen;
-      this.item.data.icons = (_this$item$data$icons = this.item.data.icons) === null || _this$item$data$icons === void 0 ? void 0 : _this$item$data$icons.map(function (item) {
-        return _this.iconEnum[item];
-      });
-    },
-    createIconEnum: function createIconEnum() {
-      var icons = this.icons.reduce(function (accumulator, icon) {
-        accumulator[icon.fa_icon] = {
-          title: icon.title,
-          "class": icon.fa_icon
-        };
-        return accumulator;
-      }, {});
-      return icons;
     },
     edit: function edit() {
       this.modalOpen = true;
@@ -7390,27 +7370,8 @@ __webpack_require__.r(__webpack_exports__);
         };
       });
     },
-    isSelected: function isSelected(value) {
-      var _this$item$data$icons2;
-
-      return (_this$item$data$icons2 = this.item.data.icons) === null || _this$item$data$icons2 === void 0 ? void 0 : _this$item$data$icons2.some(function (icon) {
-        return (icon === null || icon === void 0 ? void 0 : icon["class"]) === value;
-      });
-    },
-    toggleIcon: function toggleIcon(event) {
-      var _this$item$data$icons3;
-
-      var iconClass = event.target.value;
-
-      if ((_this$item$data$icons3 = this.item.data.icons) !== null && _this$item$data$icons3 !== void 0 && _this$item$data$icons3.includes(iconClass)) {
-        var _this$item$data$icons4, _this$item$data$icons5;
-
-        (_this$item$data$icons4 = this.item.data.icons) === null || _this$item$data$icons4 === void 0 ? void 0 : _this$item$data$icons4.splice((_this$item$data$icons5 = this.item.data.icons) === null || _this$item$data$icons5 === void 0 ? void 0 : _this$item$data$icons5.indexOf(iconClass), 1);
-      } else {
-        var _this$item$data$icons6;
-
-        (_this$item$data$icons6 = this.item.data.icons) === null || _this$item$data$icons6 === void 0 ? void 0 : _this$item$data$icons6.push(iconClass);
-      }
+    isSelected: function isSelected(key) {
+      return this.item.data.selectedIcons[key];
     }
   }
 });
@@ -7654,7 +7615,7 @@ __webpack_require__.r(__webpack_exports__);
           heading: "",
           fields: [],
           entries: null,
-          icons: null,
+          selectedIcons: [],
           category: null
         }
       });
@@ -9155,14 +9116,14 @@ var render = function () {
                           ]
                         ),
                         _vm._v(" "),
-                        _vm.item.data.icons !== undefined
+                        _vm.item.data.selectedIcons.length
                           ? _c(
                               "button",
                               {
                                 staticClass: "btn",
                                 on: {
                                   click: function ($event) {
-                                    _vm.item.data.icons = undefined
+                                    _vm.item.data.selectedIcons = []
                                   },
                                 },
                               },
@@ -9175,20 +9136,32 @@ var render = function () {
                           : _vm._e(),
                         _vm._v(" "),
                         _c(
+                          "p",
+                          { staticClass: "text-xs text-gray-light italic" },
+                          [
+                            _vm._v(
+                              "\n              *To select multiple icons, use\n              "
+                            ),
+                            _c("code", [
+                              _vm._v("Shift or CTRL (CMD on MacOS)"),
+                            ]),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
                           "select",
                           {
                             directives: [
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.item.data.icons,
-                                expression: "item.data.icons",
+                                value: _vm.item.data.selectedIcons,
+                                expression: "item.data.selectedIcons",
                               },
                             ],
                             staticClass: "py-1",
                             attrs: { multiple: "" },
                             on: {
-                              input: _vm.toggleIcon,
                               change: function ($event) {
                                 var $$selectedVal = Array.prototype.filter
                                   .call($event.target.options, function (o) {
@@ -9200,7 +9173,7 @@ var render = function () {
                                   })
                                 _vm.$set(
                                   _vm.item.data,
-                                  "icons",
+                                  "selectedIcons",
                                   $event.target.multiple
                                     ? $$selectedVal
                                     : $$selectedVal[0]
@@ -9208,30 +9181,24 @@ var render = function () {
                               },
                             },
                           },
-                          _vm._l(
-                            Object.values(_vm.createIconEnum()),
-                            function (option) {
-                              return _c(
-                                "option",
-                                {
-                                  class: _vm.isSelected(option.class)
-                                    ? "bg-blue-200"
-                                    : "",
-                                  domProps: {
-                                    value: option.class,
-                                    selected: _vm.isSelected(option.class),
-                                  },
+                          _vm._l(_vm.icons, function (option, key) {
+                            return _c(
+                              "option",
+                              {
+                                domProps: {
+                                  value: key,
+                                  selected: _vm.isSelected(key),
                                 },
-                                [
-                                  _vm._v(
-                                    "\n                " +
-                                      _vm._s(option.title) +
-                                      "\n              "
-                                  ),
-                                ]
-                              )
-                            }
-                          ),
+                              },
+                              [
+                                _vm._v(
+                                  "\n                " +
+                                    _vm._s(option) +
+                                    "\n              "
+                                ),
+                              ]
+                            )
+                          }),
                           0
                         ),
                       ]),

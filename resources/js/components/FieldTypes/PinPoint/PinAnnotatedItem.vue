@@ -111,26 +111,24 @@
               </div>
 
               <button
-                v-if="item.data.icons !== undefined"
-                @click="item.data.icons = undefined"
+                v-if="item.data.selectedIcons.length"
+                @click="item.data.selectedIcons = []"
                 class="btn"
               >
                 Clear icons
               </button>
 
-              <select
-                multiple
-                v-model="item.data.icons"
-                @input="toggleIcon"
-                class="py-1"
-              >
+              <p class="text-xs text-gray-light italic">
+                *To select multiple icons, use
+                <code>Shift or CTRL (CMD on MacOS)</code>
+              </p>
+              <select multiple v-model="item.data.selectedIcons" class="py-1">
                 <option
-                  v-for="option in Object.values(createIconEnum())"
-                  v-bind:value="option.class"
-                  :selected="isSelected(option.class)"
-                  :class="isSelected(option.class) ? 'bg-blue-200' : ''"
+                  v-for="(option, key) in icons"
+                  v-bind:value="key"
+                  :selected="isSelected(key)"
                 >
-                  {{ option.title }}
+                  {{ option }}
                 </option>
               </select>
             </div>
@@ -180,7 +178,7 @@ export default {
         data: {
           heading: "",
           entries: [],
-          icons: [],
+          selectedIcons: [],
           color: "",
           category: [],
         },
@@ -208,9 +206,7 @@ export default {
       modalOpen: false,
       heading: this.item.data.heading,
       entries: this.entries,
-      icons: this.icons,
       category: this.category,
-      iconEnum: this.createIconEnum(),
       colorConfig: {
         lock_opacity: true,
         swatches: ["#4F7EBD", "#FEB900", "#65BA3D"],
@@ -225,25 +221,7 @@ export default {
   methods: {
     modal() {
       this.modalOpen = !this.modalOpen;
-
-      this.item.data.icons = this.item.data.icons?.map((item) => {
-        return this.iconEnum[item];
-      });
     },
-
-    createIconEnum() {
-      const icons = this.icons.reduce((accumulator, icon) => {
-        accumulator[icon.fa_icon] = {
-          title: icon.title,
-          class: icon.fa_icon,
-        };
-
-        return accumulator;
-      }, {});
-
-      return icons;
-    },
-
     edit() {
       this.modalOpen = true;
     },
@@ -271,20 +249,8 @@ export default {
         };
       });
     },
-    isSelected(value) {
-      return this.item.data.icons?.some((icon) => icon?.class === value);
-    },
-    toggleIcon(event) {
-      const iconClass = event.target.value;
-
-      if (this.item.data.icons?.includes(iconClass)) {
-        this.item.data.icons?.splice(
-          this.item.data.icons?.indexOf(iconClass),
-          1
-        );
-      } else {
-        this.item.data.icons?.push(iconClass);
-      }
+    isSelected(key) {
+      return this.item.data.selectedIcons[key];
     },
   },
 };

@@ -75,7 +75,7 @@
             }"
             style="transform: translate(-50%, -100%) rotate(45deg)"
             class="pinpoint-annotate"
-            draggable="true"
+            draggable="false"
             @dragend="dragEnd($event, item, index)"
           >
             <span v-text="`${index + 1}`"></span>

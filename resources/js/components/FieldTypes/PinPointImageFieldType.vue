@@ -1,18 +1,18 @@
 <template>
   <div class="field-type-pinpoint-image">
     <div
-      class="pinpoint-image-global-actions mb-1"
+      class="mb-1 pinpoint-image-global-actions"
       v-if="hasImage || hasAnnotations"
     >
       <button
-        class="btn mr-1"
+        class="mr-1 btn"
         v-if="hasAnnotations"
         @click.prevent="clearAnnotations"
       >
         {{ __("Clear Annotations") }}
       </button>
 
-      <button class="btn mr-1" v-if="hasImage" @click.prevent="clearImage">
+      <button class="mr-1 btn" v-if="hasImage" @click.prevent="clearImage">
         {{ __("Clear Image") }}
       </button>
     </div>
@@ -43,7 +43,7 @@
             <div
               v-for="(annotation, index) in annotations"
               :key="index"
-              class="flex flex-row sortable-row items-stretch justify-stretch"
+              class="flex flex-row items-stretch sortable-row justify-stretch"
             >
               <span class="pinpoint-drag-handle sortable-handle"></span>
               <pin-annotated-item
@@ -60,9 +60,9 @@
         </sortable-list>
       </div>
 
-      <div class="pin-point-image-image order-1">
-        <div class="pinpoint-preview relative">
-          <div class="border-b border-r border-l">
+      <div class="order-1 pin-point-image-image">
+        <div class="relative pinpoint-preview">
+          <div class="border-b border-l border-r">
             <img :src="imageUrl" ref="floorplan" @click="getClickedPosition" />
           </div>
           <div
@@ -153,7 +153,7 @@ export default {
         this.image.data &&
         this.image.data.length > 0
       ) {
-        return this.image.data[0].thumbnail;
+        return this.image.data[0].url;
       }
       return null;
     },
@@ -201,19 +201,25 @@ export default {
       this.getImageAsset(value[0]);
     },
     getImageAsset(value) {
+      console.log(this.cpUrl('assets-fieldtype'));
       this.loading = true;
       this.$axios
         .get(this.cpUrl("assets-fieldtype"), {
           params: { assets: value },
         })
         .then((response) => {
+          console.log('response: ');
+          console.log(response);
           this.image = {
             container: "assets",
             data: response.data,
           };
           this.fieldValue.image = value;
           this.hasImage = true;
+          console.log("this image");
+          console.log(this.image);
         })
+        .catch(function (error) { console.log(error) })
         .finally(() => {
           this.loading = false;
         });

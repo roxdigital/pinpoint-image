@@ -1,5 +1,4 @@
 <section class="pinpoint-image">
-    @dd('test')
     @if (isset($image['url']))
         <img class="pinpoint-image__image" src="{{ $image['url'] ?? '' }}">
     @endif

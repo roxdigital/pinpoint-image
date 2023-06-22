@@ -2,7 +2,6 @@
 
 namespace Roxdigital\PinpointImage\GraphQL;
 
-
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use Statamic\Facades\Asset;
@@ -29,7 +28,6 @@ class PinPointImageFieldType extends \Rebing\GraphQL\Support\Type
             'image' => [
                 'type' => GraphQL::type(ArrayType::NAME),
                 'resolve' => function ($field) {
-
                     if (! isset($field['image'])) {
                         return [];
                     }
@@ -39,19 +37,18 @@ class PinPointImageFieldType extends \Rebing\GraphQL\Support\Type
                             ? (new AssetResource($asset))->resolve()
                             : null;
                     })->filter()->values()->first();
-                }
+                },
             ],
             'annotations' => [
                 'type' => GraphQL::type(ArrayType::NAME),
                 'resolve' => function ($field) {
-
-                    if (!isset($field['annotations'])) {
+                    if (! isset($field['annotations'])) {
                         return [];
                     }
 
                     return $field['annotations'];
                 },
-            ]
+            ],
         ];
     }
 }

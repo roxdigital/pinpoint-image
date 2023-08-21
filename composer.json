@@ -1,7 +1,7 @@
 {
   "name": "roxdigital/pinpoint-image-new",
   "require": {
-    "php": "^8.2",
+    "php": "^8.1",
     "aerni/font-awesome": "^2.0"
   },
   "autoload": {

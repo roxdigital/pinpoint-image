@@ -2,43 +2,46 @@
 
 namespace Roxdigital\PinpointImage\Fieldtypes;
 
+use Illuminate\Support\Facades\Log;
+use Roxdigital\PinpointImage\GraphQL\PinPointImageFieldType;
+use Statamic\Exceptions\AssetContainerNotFoundException;
+use Statamic\Facades\Asset;
+use Statamic\Facades\AssetContainer;
+use Statamic\Facades\Entry;
+use Statamic\Facades\GraphQL;
 use Statamic\Facades\Term;
+use Statamic\Fields\Fields as BlueprintFields;
+use Statamic\Fields\Fieldtype;
+use Statamic\Fieldtypes\Assets\DimensionsRule;
+use Statamic\Fieldtypes\Assets\ImageRule;
+use Statamic\Fieldtypes\Assets\MaxRule;
+use Statamic\Fieldtypes\Assets\MimesRule;
+use Statamic\Fieldtypes\Assets\MimetypesRule;
+use Statamic\Fieldtypes\Assets\MinRule;
+use Statamic\Fieldtypes\Assets\UndefinedContainerException;
 use Statamic\GraphQL\Queries\TaxonomyQuery;
+use Statamic\GraphQL\Types\ArrayType;
+use Statamic\GraphQL\Types\AssetInterface;
+use Statamic\Http\Resources\CP\Assets\Asset as AssetResource;
+use Statamic\Statamic;
 use Statamic\Support\Arr;
 use Statamic\Support\Str;
-use Statamic\Facades\Entry;
-use Statamic\Facades\Asset;
-use Statamic\Facades\GraphQL;
-use Statamic\Fields\Fieldtype;
-use Illuminate\Support\Facades\Log;
-use Statamic\Facades\AssetContainer;
-use Statamic\GraphQL\Types\ArrayType;
-use Statamic\Fieldtypes\Assets\MaxRule;
-use Statamic\Fieldtypes\Assets\MinRule;
-use Statamic\Fieldtypes\Assets\ImageRule;
-use Statamic\Fieldtypes\Assets\MimesRule;
-use Statamic\GraphQL\Types\AssetInterface;
-use Statamic\Fieldtypes\Assets\MimetypesRule;
-use Statamic\Fields\Fields as BlueprintFields;
-use Statamic\Fieldtypes\Assets\DimensionsRule;
-use Statamic\Exceptions\AssetContainerNotFoundException;
-use Statamic\Fieldtypes\Assets\UndefinedContainerException;
-use Roxdigital\PinpointImage\GraphQL\PinPointImageFieldType;
-use Statamic\Http\Resources\CP\Assets\Asset as AssetResource;
 use Statamic\Tags\Tags;
 use Statamic\Taxonomies\Taxonomy;
 
 class PinPointImage extends Fieldtype
 {
     protected $categories = ['media', 'relationship'];
+
     protected $defaultValue = [
         'image' => '',
         'annotations' => [],
         'entries' => [],
         'color' => '',
         'map_categories' => [],
-        'icons' => []
+        'icons' => [],
     ];
+
     protected $selectableInForms = true;
 
     protected function configFieldItems(): array
@@ -83,6 +86,20 @@ class PinPointImage extends Fieldtype
                 'default' => true,
                 'width' => 50,
             ],
+            'has_max_fields' => [
+                'display' => __('Has max fields limit'),
+                'instructions' => 'Do you wish to limit how many fields a user can add?',
+                'type' => 'toggle',
+                'default' => false,
+                'width' => 50,
+            ],
+            'max_fields' => [
+                'type' => 'integer',
+                'display' => 'Max Fields',
+                'default' => 5,
+                'instructions' => 'If toggle above is on, then how many fields do you wish to limit it to?',
+                'min' => 1,
+            ],
             'show_filename' => [
                 'display' => __('Show Filename'),
                 'instructions' => __('statamic::fieldtypes.assets.config.show_filename'),
@@ -111,7 +128,7 @@ class PinPointImage extends Fieldtype
     }
 
     public function process($data)
-    {   
+    {
         return $data;
     }
 
@@ -122,6 +139,9 @@ class PinPointImage extends Fieldtype
 
     public function preload()
     {
+        $version = Statamic::version();
+        $versionArray = explode('.', $version);
+
         $entries = Entry::whereCollection('pages');
         $mapCategories = Term::whereTaxonomy('map_category');
         $icons = Term::whereTaxonomy('icons')->mapWithKeys(function ($icon) {
@@ -136,7 +156,9 @@ class PinPointImage extends Fieldtype
             'container' => $this->container()->handle(),
             'entries' => $entries,
             'map_categories' => $mapCategories,
-            'icons' => $icons
+            'icons' => $icons,
+            'statamic_version' => $version,
+            'statamic_major_version' => isset($versionArray[0]) ? (int) $versionArray[0] : 4,
         ];
     }
 
@@ -171,5 +193,4 @@ class PinPointImage extends Fieldtype
     {
         return GraphQL::type(PinPointImageFieldType::NAME);
     }
-
 }

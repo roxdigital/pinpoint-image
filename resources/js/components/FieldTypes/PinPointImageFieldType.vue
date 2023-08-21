@@ -1,18 +1,18 @@
 <template>
   <div class="field-type-pinpoint-image">
     <div
-      class="pinpoint-image-global-actions mb-1"
+      class="mb-1 pinpoint-image-global-actions"
       v-if="hasImage || hasAnnotations"
     >
       <button
-        class="btn mr-1"
+        class="mr-1 btn"
         v-if="hasAnnotations"
         @click.prevent="clearAnnotations"
       >
         {{ __("Clear Annotations") }}
       </button>
 
-      <button class="btn mr-1" v-if="hasImage" @click.prevent="clearImage">
+      <button class="mr-1 btn" v-if="hasImage" @click.prevent="clearImage">
         {{ __("Clear Image") }}
       </button>
     </div>
@@ -20,11 +20,12 @@
     <div class="assets-fieldtype-picker">
       <assets-fieldtype
         :value="assetImage"
+        ref="assets"
+        handle="assets"
         :config="config"
         :meta="meta"
-        :handle="handle"
         :readOnly="readOnly"
-        @input="updateKey($event)"
+        @input="updateKey"
       ></assets-fieldtype>
     </div>
 
@@ -43,7 +44,7 @@
             <div
               v-for="(annotation, index) in annotations"
               :key="index"
-              class="flex flex-row sortable-row items-stretch justify-stretch"
+              class="flex flex-row items-stretch sortable-row justify-stretch"
             >
               <span class="pinpoint-drag-handle sortable-handle"></span>
               <pin-annotated-item
@@ -60,9 +61,9 @@
         </sortable-list>
       </div>
 
-      <div class="pin-point-image-image order-1">
-        <div class="pinpoint-preview relative">
-          <div class="border-b border-r border-l">
+      <div class="order-1 pin-point-image-image">
+        <div class="relative pinpoint-preview">
+          <div class="border-b border-l border-r">
             <img :src="imageUrl" ref="floorplan" @click="getClickedPosition" />
           </div>
           <div
@@ -155,7 +156,7 @@ export default {
       ) {
         return this.image.data[0].thumbnail;
       }
-      return null;
+      return false;
     },
     assetImage() {
       return this.fieldValue.image === null ? [] : [this.fieldValue.image];
@@ -166,9 +167,6 @@ export default {
   },
 
   methods: {
-    logToConsole(message) {
-      console.log(message);
-    },
     clearImage() {
       if (!confirm("Are you sure?")) {
         return;
@@ -189,22 +187,43 @@ export default {
       this.updateMeta(newMeta);
       this.update([]);
     },
-    updateKey(value) {
-      if (value === null) {
+    updateKey(assets) {
+      if (assets === null) {
         this.cleanOutImage();
         return;
       }
-      if (value.length === 0) {
+      if (assets.length === 0) {
         this.cleanOutImage();
         return;
       }
-      this.getImageAsset(value[0]);
+      if(this.meta.statamic_major_version === 3) {
+        return this.getImageAssetV3(assets[0]);
+      }
+      this.getImageAsset(assets[0]);
+    },
+    getImageAssetV3(value) {
+      this.loading = true;
+      this.$axios
+          .get(this.cpUrl("assets-fieldtype"), {
+              assets:[ value ],
+          })
+          .then((response) => {
+              this.image = {
+                  container: "assets",
+                  data: response.data,
+              };
+              this.fieldValue.image = value;
+              this.hasImage = true;
+          })
+          .finally(() => {
+              this.loading = false;
+          });
     },
     getImageAsset(value) {
       this.loading = true;
       this.$axios
-        .get(this.cpUrl("assets-fieldtype"), {
-          params: { assets: value },
+        .post(this.cpUrl("assets-fieldtype"), {
+          assets: [ value ],
         })
         .then((response) => {
           this.image = {
@@ -293,6 +312,11 @@ export default {
   );
   border-width: 1px;
   border-radius: 3px;
+    min-width: 360px;
+    font-size: 12px;
+}
+.field-type-pinpoint-image .asset-table-listing {
+    display: none;
 }
 .field-type-pinpoint-image .asset-upload-control {
   margin-left: 16px;

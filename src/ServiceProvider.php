@@ -2,10 +2,10 @@
 
 namespace Roxdigital\PinpointImage;
 
-use Statamic\Facades\GraphQL;
-use Statamic\Providers\AddonServiceProvider;
 use Roxdigital\PinpointImage\Fieldtypes\PinPointImage;
 use Roxdigital\PinpointImage\GraphQL\PinPointImageFieldType;
+use Statamic\Facades\GraphQL;
+use Statamic\Providers\AddonServiceProvider;
 use Statamic\Statamic;
 
 class ServiceProvider extends AddonServiceProvider

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a5d695dd4f3359c01061825370744b86",
+    "content-hash": "590cee1a49414aa45b5086857afd7b22",
     "packages": [
         {
             "name": "aerni/font-awesome",
@@ -8485,7 +8485,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.2"
+        "php": "^8.1"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"

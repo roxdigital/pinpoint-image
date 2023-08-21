@@ -1,28 +1,28 @@
 {
-    "name": "roxdigital/pinpoint-image",
-    "require": {
-        "php": "^8.0",
-        "aerni/font-awesome": "^2.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "Roxdigital\\PinpointImage\\": "src"
-        }
-    },
-    "extra": {
-        "statamic": {
-            "name": "Pinpoint Image",
-            "description": "Pinpoint Image addon"
-        },
-        "laravel": {
-            "providers": [
-                "Roxdigital\\PinpointImage\\ServiceProvider"
-            ]
-        }
-    },
-    "config": {
-        "allow-plugins": {
-            "pixelfear/composer-dist-plugin": true
-        }
+  "name": "roxdigital/pinpoint-image-new",
+  "require": {
+    "php": "^8.0",
+    "aerni/font-awesome": "^2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Roxdigital\\PinpointImage\\": "src"
     }
+  },
+  "extra": {
+    "statamic": {
+      "name": "Pinpoint Image",
+      "description": "Pinpoint Image addon"
+    },
+    "laravel": {
+      "providers": [
+        "Roxdigital\\PinpointImage\\ServiceProvider"
+      ]
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "pixelfear/composer-dist-plugin": true
+    }
+  }
 }

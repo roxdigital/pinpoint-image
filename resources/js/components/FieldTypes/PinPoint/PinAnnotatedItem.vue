@@ -1,7 +1,7 @@
 <template>
-  <div class="px-1 py-1 bg-white border-b border-r border-l flex-1">
+  <div class="flex-1 px-1 py-1 bg-white border-b border-l border-r">
     <div class="flex flex-col gap-1">
-      <h5 v-text="`Point ${itemIndex + 1}`" class="text-xs mb-0"></h5>
+      <h5 v-text="`Point ${itemIndex + 1}`" class="mb-0 text-xs"></h5>
       <h6
         v-text="item.data.heading"
         class="break-all"
@@ -33,30 +33,30 @@
       :overflow="false"
       width="75%"
     >
-      <div class="p-3 relative">
+      <div class="relative p-3">
         <button
-          class="btn-close absolute top-0 right-0 mt-2 mr-2"
+          class="absolute top-0 right-0 mt-2 mr-2 btn-close"
           :aria-label="__('Close')"
           @click="modal"
           v-html="'&times'"
         />
 
-        <div class="content mt-0 mb-2">
+        <div class="mt-0 mb-2 content">
           <h2>Content</h2>
           <p class="max-w-lg">Edit your marker content here:</p>
         </div>
 
         <div>
           <!-- Label -->
-          <label class="text-base font-bold mb-1">Label</label>
+          <label class="mb-1 text-base font-bold">Label</label>
           <input
             type="text"
             v-model="item.data.heading"
-            class="input-text mb-2"
+            class="mb-2 input-text"
           />
 
           <!-- Layout -->
-          <div class="grid w-full grid-cols-2 gap-x-4 mt-2">
+          <div class="grid w-full grid-cols-2 mt-2 gap-x-4">
             <!-- Category -->
             <div class="flex flex-col gap-2">
               <h3 class="text-base font-bold">Category</h3>
@@ -102,12 +102,12 @@
             </div>
           </div>
 
-          <div class="grid w-full grid-cols-2 gap-x-4 mt-2">
+          <div class="grid w-full grid-cols-2 mt-2 gap-x-4">
             <!-- Icons-->
             <div class="flex flex-col gap-2 mt-2">
               <div class="flex items-center gap-x-1">
                 <h3 class="text-base font-bold">Icons</h3>
-                <span class="text-xs text-gray-50 italic">(Max. 3 icons).</span>
+                <span class="text-xs italic text-gray-50">(Max. 3 icons).</span>
               </div>
 
               <button
@@ -118,7 +118,7 @@
                 Clear icons
               </button>
 
-              <p class="text-xs text-gray-light italic">
+              <p class="text-xs italic text-gray-light">
                 *To select multiple icons, use
                 <code>Shift or CTRL (CMD on MacOS)</code>
               </p>
@@ -138,7 +138,7 @@
               <!-- <p class="text-base font-bold">Color</p> -->
               <div class="flex items-center gap-x-1">
                 <h3 class="text-base font-bold">Color</h3>
-                <span class="text-xs text-gray-50 italic">(HEX or RGBA).</span>
+                <span class="text-xs italic text-gray-50">(HEX or RGBA).</span>
               </div>
 
               <color-fieldtype
@@ -152,9 +152,9 @@
 
         <!-- Close button -->
         <div class="mt-2">
-          <div class="flex flex-row justify-between">
+          <div class="flex flex-row justify-between mt-5">
             <button
-              class="btn-primary w-auto ml-auto flex justify-center items-center"
+              class="flex items-center justify-center w-auto ml-auto btn-primary"
               @click="modal"
             >
               {{ __("Close") }}

@@ -2,7 +2,7 @@
   <div class="field-type-pinpoint-image">
     <div
       class="mb-1 pinpoint-image-global-actions"
-      v-if="hasImage || hasAnnotations"
+
     >
       <button
         class="mr-1 btn"
@@ -12,7 +12,7 @@
         {{ __("Clear Annotations") }}
       </button>
 
-      <button class="mr-1 btn" v-if="hasImage" @click.prevent="clearImage">
+      <button class="mr-1 btn"  @click.prevent="clearImage">
         {{ __("Clear Image") }}
       </button>
     </div>
@@ -112,7 +112,11 @@ export default {
     if (this.value !== null && this.value.image && this.value.annotations) {
       this.fieldValue = this.value;
       if (this.value.image !== null) {
-        this.getImageAsset(this.value.image);
+        if(this.meta.statamic_major_version === 3) {
+            return this.getImageAssetV3(this.value.image);
+        } else {
+            this.getImageAsset(this.value.image);
+        }
       }
 
       if (this.value.annotations.length > 0) {
@@ -128,7 +132,7 @@ export default {
   data() {
     return {
       drag: false,
-      fieldValue: { image: {}, annotations: [] },
+      fieldValue: { image: null, annotations: [] },
       hasImage: false,
       image: [],
       annotations: [],
@@ -196,6 +200,7 @@ export default {
         this.cleanOutImage();
         return;
       }
+      console.log(this.meta.statamic_major_version)
       if(this.meta.statamic_major_version === 3) {
         return this.getImageAssetV3(assets[0]);
       }
@@ -204,8 +209,8 @@ export default {
     getImageAssetV3(value) {
       this.loading = true;
       this.$axios
-          .get(this.cpUrl("assets-fieldtype"), {
-              assets:[ value ],
+          .post(this.cpUrl("assets-fieldtype"), {
+            params: { assets: value },
           })
           .then((response) => {
               this.image = {

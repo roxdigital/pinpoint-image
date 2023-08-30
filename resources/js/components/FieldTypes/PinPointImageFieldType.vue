@@ -12,7 +12,7 @@
         {{ __("Clear Annotations") }}
       </button>
 
-      <button class="mr-1 btn"  @click.prevent="clearImage">
+      <button class="mr-1 btn" @click.prevent="clearImage">
         {{ __("Clear Image") }}
       </button>
     </div>
@@ -105,6 +105,7 @@ export default {
   mixins: [Fieldtype, SortableHelpers],
 
   mounted() {
+    console.log('test-yo-moma');
     if (this.config.max_files === undefined) {
       this.config.max_files = 1;
     }
